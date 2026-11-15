@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Портфолио Ж. Салимановой</title>
+<meta name="description" content="Тарих пәні мұғалімі Салиманова Жанылсын Кадиржановнаның портфолиосы — ғасырлар арқылы саяхат">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c140f; --parch:#f6efe2; --gold:#d4ad62; --gold2:#f0d595;
+  --line:rgba(240,213,149,.28); --glass:rgba(16,11,8,.58);
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0d0906;color:var(--parch);font-family:var(--sans);font-weight:300;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+#gl{position:fixed;inset:0;z-index:0}
+#gl canvas,#fx{position:fixed;inset:0;width:100%;height:100%;display:block}
+#fx{z-index:1;pointer-events:none}
+main{position:relative;z-index:2}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* loader */
+#load{position:fixed;inset:0;z-index:300;background:#0d0906;display:grid;place-items:center;transition:opacity 1s .2s}
+#load.done{opacity:0;pointer-events:none}
+#load .lt{font-family:var(--serif);font-size:30px;font-style:italic;color:var(--gold2);text-align:center}
+#load .bar{width:180px;height:1px;background:rgba(240,213,149,.2);margin:18px auto 0;overflow:hidden}
+#load .bar i{display:block;height:100%;width:0;background:var(--gold2);transition:width .3s}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 26px;transition:background .4s}
+nav.solid{background:rgba(13,9,6,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.logo{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--gold2);text-decoration:none}
+.lang{display:flex;border:1px solid var(--gold);border-radius:30px;overflow:hidden;background:rgba(13,9,6,.4)}
+.lang button{background:none;border:0;color:var(--parch);padding:6px 14px;font:500 12px var(--sans);letter-spacing:.1em;cursor:pointer}
+.lang button.on{background:var(--gold);color:var(--ink)}
+#eras{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:14px}
+#eras a{width:11px;height:11px;border-radius:50%;border:1px solid var(--gold2);display:block;position:relative;transition:.3s}
+#eras a.on{background:var(--gold2);transform:scale(1.35)}
+#eras a span{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:.3s;background:rgba(13,9,6,.75);padding:3px 10px;border-radius:12px}
+#eras a:hover span,#eras a.on span{opacity:1}
+
+/* ===== INTRO (teacher) ===== */
+#intro{height:460vh;position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden}
+#teacher{position:absolute;bottom:0;right:9vw;height:92vh;width:auto;max-width:none;transform-origin:50% 100%;
+  filter:brightness(.9) contrast(1.04) saturate(.95) drop-shadow(0 0 40px rgba(255,190,110,.22));will-change:transform,opacity,filter;opacity:0}
+#teacher.in{animation:appear 2.2s cubic-bezier(.2,.8,.2,1) .4s forwards}
+@keyframes appear{0%{opacity:0;filter:brightness(2.2) blur(14px) drop-shadow(0 0 60px rgba(255,200,120,.9))}100%{opacity:1;filter:brightness(.9) contrast(1.04) saturate(.95) blur(0) drop-shadow(0 0 40px rgba(255,190,110,.22))}}
+.floor{position:absolute;bottom:-4vh;right:calc(9vw - 3vh);width:34vh;height:8vh;border-radius:50%;background:radial-gradient(rgba(0,0,0,.65),transparent 70%)}
+.say{position:absolute;left:7vw;top:50%;width:min(600px,50vw)}
+.say > div{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100%;opacity:0;transition:none}
+.kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(46px,7vw,104px);line-height:.92;margin:16px 0 18px;text-shadow:0 6px 40px rgba(0,0,0,.6)}
+h1 em,.big em{font-style:italic;color:var(--gold2);font-weight:500}
+.big{font-family:var(--serif);font-size:clamp(36px,4.6vw,66px);line-height:1.04;font-weight:600;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.sub{font-size:17px;opacity:.9;margin-top:16px;text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:26px;background:var(--gold);color:var(--ink);padding:14px 26px;border-radius:40px;font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 0 0 0 rgba(212,173,98,.6);animation:pulse 2.2s infinite}
+@keyframes pulse{100%{box-shadow:0 0 0 26px rgba(212,173,98,0)}}
+.cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;text-transform:uppercase;text-align:center;opacity:.85}
+.cue::after{content:"";display:block;width:1px;height:34px;background:linear-gradient(var(--gold2),transparent);margin:10px auto 0;animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ===== ERAS ===== */
+.portal{height:170vh;position:relative}
+.era{position:sticky;top:30vh;text-align:center;padding:0 20px;opacity:0}
+.era .yr{font-family:var(--serif);font-size:clamp(80px,15vw,210px);line-height:1;color:#fff6e0;font-style:italic;text-shadow:0 0 70px rgba(255,205,130,.85),0 4px 30px rgba(0,0,0,.4)}
+.era .nm{font-size:13px;letter-spacing:.45em;text-transform:uppercase;margin-top:8px;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.era .t2{font-family:var(--serif);font-size:clamp(28px,3.8vw,50px);text-shadow:0 2px 18px rgba(0,0,0,.8)}
+.scene{padding:70vh 0 40vh}
+.scene .panel + .panel{margin-top:70vh}
+.panel{background:var(--glass);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%);border:1px solid var(--line);border-radius:28px;padding:clamp(26px,4.5vw,58px);box-shadow:0 40px 100px -40px rgba(0,0,0,.8)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(40px,5vw,70px);line-height:1;margin:12px 0 18px}
+h2 em{font-style:italic;color:var(--gold2);font-weight:500}
+.lead{font-size:17px;max-width:620px;opacity:.88}
+
+.motto{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);line-height:1.15;font-style:italic;max-width:900px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{font-size:12.5px;border:1px solid var(--line);border-radius:30px;padding:7px 15px;background:rgba(255,240,210,.05)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;border-top:1px solid var(--line)}
+.stat{padding:28px 10px 6px;text-align:center}
+.stat .n{font-family:var(--serif);font-size:clamp(52px,6vw,86px);line-height:1;color:var(--gold2)}
+.stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.78;margin-top:8px}
+
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.tile{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(255,240,210,.04);transition:transform .4s,border-color .4s,background .4s}
+.tile:hover{transform:translateY(-6px);border-color:var(--gold);background:rgba(255,240,210,.09)}
+.tile .ic{font-size:28px}
+.tile h3{font-family:var(--serif);font-size:23px;font-weight:600;margin:8px 0 4px;line-height:1.1}
+.tile p{font-size:13px;opacity:.75}
+.qrow{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:end}
+.bars{display:flex;gap:22px;align-items:flex-end;height:250px;border-bottom:1px solid var(--gold2);margin-bottom:30px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}
+.bar .fill{width:100%;height:0;background:linear-gradient(180deg,var(--gold2),#8a5a22);border-radius:10px 10px 0 0;transition:height 1.6s cubic-bezier(.2,.8,.2,1)}
+.bar .pct{font-family:var(--serif);font-size:36px;font-weight:600;margin-bottom:4px}
+.bar .yr{font-size:12px;position:absolute;bottom:-26px;opacity:.8}
+.zoom{color:var(--gold2);font-size:13px}
+
+.years{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+.yrc{border-top:2px solid var(--gold);padding-top:12px}
+.yrc b{font-family:var(--serif);font-size:34px;color:var(--gold2);font-weight:600;display:block;line-height:1}
+.yrc span{font-size:13px;opacity:.85}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 18px}
+.filters button{background:none;border:1px solid var(--line);color:inherit;border-radius:30px;padding:8px 18px;font:400 13px var(--sans);cursor:pointer;transition:.25s}
+.filters button.on,.filters button:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 18px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.strip::-webkit-scrollbar{height:6px}.strip::-webkit-scrollbar-thumb{background:var(--gold);border-radius:6px}
+.card{flex:0 0 230px;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:#fbf6ec;color:var(--ink);cursor:zoom-in;transition:transform .35s}
+.card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.card .ph{height:300px;background:#eee center/cover no-repeat}
+.card .cap{padding:11px 13px 13px;font-size:12.5px;line-height:1.4}
+.card .cap b{display:flex;justify-content:space-between;gap:6px;font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#a5502e;margin-bottom:4px}
+.card.hide{display:none}
+.navbtns{display:flex;gap:8px}
+.navbtns button{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);background:none;color:var(--gold2);font-size:18px;cursor:pointer}
+.navbtns button:hover{background:var(--gold);color:var(--ink)}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0 20px}
+.medal{border-radius:16px;padding:16px;text-align:center;color:var(--ink);background:#e8dcc6}
+.medal .n{font-family:var(--serif);font-size:46px;font-weight:600;line-height:1}
+.medal.g{background:linear-gradient(150deg,#f3dc9c,#c8a25a)}.medal.s{background:linear-gradient(150deg,#f0ede7,#bdb6aa)}.medal.b{background:linear-gradient(150deg,#ebbf9a,#b87648)}
+.medal .l{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+
+.game{display:grid;grid-template-columns:1fr 1.3fr;gap:38px;align-items:center}
+.gframe{position:relative;aspect-ratio:16/11;border-radius:18px;overflow:hidden;border:1px solid var(--gold);background:#120c08}
+.gframe iframe{width:100%;height:100%;border:0}
+.gframe .cover{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle,rgba(20,14,10,.15),rgba(20,14,10,.8)),url(img/era3.jpg) center/cover;cursor:pointer;transition:opacity .4s}
+.gframe .cover span{background:var(--gold);color:var(--ink);padding:14px 26px;border-radius:40px;font-weight:600;font-size:14px}
+.gframe.live .cover{opacity:0;pointer-events:none}
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:var(--gold);color:var(--ink);text-decoration:none;padding:13px 24px;border-radius:40px;font-weight:600;font-size:13.5px;transition:transform .25s}
+.btn:hover{transform:translateY(-3px)}
+.btn.ghost{background:none;border:1px solid var(--gold);color:var(--gold2);margin-left:8px}
+
+.lessons{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;margin-top:20px}
+.lesson{border-top:1px solid var(--line);padding:14px 0;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+.lesson .cl{font-family:var(--serif);font-size:30px;color:var(--gold2);font-style:italic}
+.lesson h4{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.15}
+.score{font-size:11px;border:1px solid var(--gold);color:var(--gold2);border-radius:20px;padding:4px 10px;white-space:nowrap}
+.video{aspect-ratio:21/9;border-radius:18px;margin-top:26px;background:linear-gradient(rgba(13,9,6,.55),rgba(13,9,6,.8)),url(img/teacher-lib.jpg) center 30%/cover;display:grid;place-items:center;text-align:center;border:1px solid var(--line)}
+.play{width:78px;height:78px;border-radius:50%;background:var(--gold);display:grid;place-items:center;margin:0 auto 12px;animation:pulse 2.2s infinite}
+.play::after{content:"";border-left:22px solid var(--ink);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
+
+footer{padding:30vh 0 70px;text-align:center}
+footer .big{font-size:clamp(50px,8.5vw,120px);font-style:italic;color:#fff3d6;text-shadow:0 0 60px rgba(242,193,78,.65)}
+footer p{opacity:.75;font-size:13px;margin-top:18px;text-shadow:0 2px 10px #000}
+
+#lb{position:fixed;inset:0;background:rgba(8,5,3,.94);z-index:200;display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-height:92vh;max-width:92vw;border-radius:8px}
+#lb .x{position:absolute;top:18px;right:26px;font-size:34px}
+
+.rv{opacity:0;transform:translateY(70px) scale(.97);filter:blur(6px);transition:opacity 1.1s,transform 1.1s cubic-bezier(.2,.8,.2,1),filter 1.1s}
+.rv.in{opacity:1;transform:none;filter:none}
+
+@media (max-width:900px){
+  #eras{display:none}
+  #teacher{right:50%;transform:translateX(50%);height:66vh}
+  .floor{right:50%;transform:translateX(50%)}
+  .say{left:16px;right:16px;top:18vh;transform:none;max-width:none}
+  .say > div{top:0;transform:none}
+  h1{font-size:44px}
+  .stats,.medals{grid-template-columns:1fr 1fr}
+  .tiles{grid-template-columns:1fr 1fr}
+  .qrow,.game,.lessons{grid-template-columns:1fr}
+  .years{grid-template-columns:1fr 1fr}
+  .wrap{padding:0 14px}
+  .btn.ghost{margin-left:0}
+  .card{flex-basis:200px}.card .ph{height:260px}
+}
+@media (max-width:520px){.tiles{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}#teacher{opacity:1}}
+</style>
+</head>
+<body>
+<div id="load"><div><div class="lt">Тарих — тірі</div><div class="bar"><i id="lbar"></i></div></div></div>
+<div id="gl"></div>
+<canvas id="fx"></canvas>
+
+<nav id="nav">
+  <a class="logo" href="#intro">Ж.С.</a>
+  <div class="lang"><button data-l="kz" class="on">ҚАЗ</button><button data-l="ru">РУС</button></div>
+</nav>
+<div id="eras"></div>
+
+<main>
+<!-- INTRO: library + teacher -->
+<section id="intro" data-stage="hold" data-a="0" data-z0="0" data-z1=".28">
+  <div class="stage">
+    <div class="floor" id="floor"></div>
+    <img id="teacher" src="img/teacher-cut.png" alt="Салиманова Жанылсын Кадиржановна">
+    <div class="say">
+      <div id="s0"><div class="kicker" data-t="kick"></div><h1>Салиманова<br><em>Жанылсын</em><br>Кадиржановна</h1><p class="sub" data-t="role"></p></div>
+      <div id="s1"><div class="big" data-t="hi"></div><p class="sub" data-t="hi2"></p></div>
+      <div id="s2"><div class="big" data-t="inv"></div><a class="cta" href="#p1" data-t="go"></a></div>
+    </div>
+    <div class="cue" id="cue" data-t="scroll"></div>
+  </div>
+</section>
+
+<div class="portal" id="p1" data-stage="trans" data-a="0" data-b="1"><div class="era"><div class="yr" data-t="y1"></div><div class="nm" data-t="e1n"></div><div class="t2" data-t="e1t"></div></div></div>
+
+<!-- ERA 1: steppe -->
+<section class="scene" data-stage="hold" data-a="1" data-z0="0" data-z1=".35">
+  <div class="wrap">
+    <div class="panel rv">
+      <div class="kicker" data-t="aboutK"></div>
+      <p class="motto" data-t="motto"></p>
+      <div class="chips"><span class="chip" data-t="c1"></span><span class="chip" data-t="c2"></span><span class="chip" data-t="c3"></span><span class="chip" data-t="c4"></span></div>
+      <div class="stats">
+        <div class="stat"><div class="n" data-count="89" data-suf="%">0</div><div class="l" data-t="s1"></div></div>
+        <div class="stat"><div class="n" data-count="21">0</div><div class="l" data-t="s2"></div></div>
+        <div class="stat"><div class="n" data-count="15">0</div><div class="l" data-t="s3"></div></div>
+        <div class="stat"><div class="n" data-count="10">0</div><div class="l" data-t="s4"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="portal" data-stage="trans" data-a="1" data-b="2"><div class="era"><div class="yr" data-t="y2"></div><div class="nm" data-t="e2n"></div><div class="t2" data-t="e2t"></div></div></div>
+
+<!-- ERA 2: Silk Road -->
+<section class="scene" data-stage="hold" data-a="2" data-z0="0" data-z1=".35">
+  <div class="wrap">
+    <div class="panel rv">
+      <div class="kicker" data-t="mK"></div>
+      <h2 data-t="mH"></h2>
+      <div class="tiles" id="tiles"></div>
+    </div>
+    <div class="panel rv qrow">
+      <div><div class="kicker" data-t="qK"></div><h2 data-t="qH"></h2><a href="img/quality.jpg" class="zoom" data-t="qDoc"></a></div>
+      <div class="bars" id="bars">
+        <div class="bar"><div class="pct">79%</div><div class="fill" data-h="79"></div><div class="yr">2023–24</div></div>
+        <div class="bar"><div class="pct">83%</div><div class="fill" data-h="83"></div><div class="yr">2024–25</div></div>
+        <div class="bar"><div class="pct">89%</div><div class="fill" data-h="89"></div><div class="yr">2025–26</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="portal" data-stage="trans" data-a="2" data-b="3"><div class="era"><div class="yr">1465</div><div class="nm" data-t="e3n"></div><div class="t2" data-t="e3t"></div></div></div>
+
+<!-- ERA 3: Khanate -->
+<section class="scene" data-stage="hold" data-a="3" data-z0="0" data-z1=".35">
+  <div class="wrap">
+    <div class="panel rv">
+      <div class="head"><div><div class="kicker" data-t="aK"></div><h2 data-t="aH"></h2></div><div class="navbtns"><button data-s="gA" data-d="-1">←</button><button data-s="gA" data-d="1">→</button></div></div>
+      <div class="years" id="years"></div>
+      <div class="filters" id="fA"></div>
+      <div class="strip" id="gA"></div>
+    </div>
+  </div>
+</section>
+
+<div class="portal" data-stage="trans" data-a="3" data-b="4"><div class="era"><div class="yr">1991</div><div class="nm" data-t="e4n"></div><div class="t2" data-t="e4t"></div></div></div>
+
+<!-- ERA 4: Astana -->
+<section class="scene" data-stage="hold" data-a="4" data-z0="0" data-z1=".3" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="panel rv">
+      <div class="head"><div><div class="kicker" data-t="stK"></div><h2 data-t="stH"></h2></div><div class="navbtns"><button data-s="gS" data-d="-1">←</button><button data-s="gS" data-d="1">→</button></div></div>
+      <div class="medals">
+        <div class="medal g"><div class="n">2</div><div class="l" data-t="m1"></div></div>
+        <div class="medal s"><div class="n">2</div><div class="l" data-t="m2"></div></div>
+        <div class="medal b"><div class="n">5</div><div class="l" data-t="m3"></div></div>
+        <div class="medal"><div class="n">6</div><div class="l" data-t="m4"></div></div>
+      </div>
+      <div class="strip" id="gS"></div>
+    </div>
+
+    <div class="panel rv game" id="game">
+      <div>
+        <div class="kicker" data-t="gK"></div>
+        <h2 data-t="gH"></h2>
+        <p class="lead" data-t="gP"></p>
+        <div class="chips" id="gchips"></div>
+        <a class="btn" href="https://shyngly29-bit.github.io/dala-zhorygy/" target="_blank" rel="noopener" data-t="gBtn"></a>
+      </div>
+      <div class="gframe" id="gframe"><div class="cover"><span data-t="gTry"></span></div></div>
+    </div>
+
+    <div class="panel rv">
+      <div class="kicker" data-t="lK"></div>
+      <h2 data-t="lH"></h2>
+      <div class="lessons" id="ls"></div>
+      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1v8-eQ8nFFE0_xEhsJTpCqzXfSgpHkr1k" data-t="lBtn"></a>
+      <a class="btn ghost" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1T1okWqTKLHD5W1OpGzeIjWbJbH5hcsWc" data-t="lBtn2"></a>
+      <div class="video"><div><div class="play"></div><div style="font-family:var(--serif);font-size:26px" data-t="vH"></div><div style="opacity:.7;font-size:13px" data-t="vP"></div></div></div>
+    </div>
+  </div>
+  <footer><div class="wrap"><div class="big" data-t="fBig"></div><p data-t="fP"></p></div></footer>
+</section>
+</main>
+
+<div id="lb"><span class="x">×</span><img alt=""></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============ CONTENT ============ */
+const T={
+kz:{kick:"Тарих пәні мұғалімі · Педагог-зерттеуші",role:"№81 жалпы білім беретін орта мектеп",
+hi:"Сәлеметсіз бе!<br><em>Қош келдіңіз.</em>",hi2:"Тарихты жаттатпаймын — оны тірілтемін.",
+inv:"Менімен бірге<br><em>ғасырлар арқылы</em><br>саяхатқа шығыңыз",go:"Саяхатты бастау ↓",scroll:"Айналдырыңыз",
+y1:"б.з.б. VII ғ.",e1n:"I дәуір",e1t:"Сақтар даласы",y2:"XII ғ.",e2n:"II дәуір · Ұлы Жібек жолы",e2t:"Түркістан",e3n:"III дәуір",e3t:"Қазақ хандығы",e4n:"IV дәуір",e4t:"Тәуелсіз Қазақстан",
+er:["Кіріспе","Сақтар","Жібек жолы","Хандық","Тәуелсіздік"],
+aboutK:"Мен туралы",motto:"«Өткенін білмеген ұрпақ — болашағын болжай алмайды»",
+c1:"№81 орта мектеп",c2:"Педагог-зерттеуші",c3:"Қазақстан және дүниежүзі тарихы",c4:"«Үздік пән мұғалімі – 2026»",
+s1:"білім сапасы",s2:"марапат",s3:"оқушы жеңісі",s4:"сабақ · 3/3 балл",
+mK:"Әдістеме",mH:"Сабағым — <em>шағын зерттеу</em>",
+qK:"Нәтиже",qH:"Білім сапасы <em>өсуде</em>",qDoc:"Растайтын құжат →",
+aK:"Жетістіктер",aH:"Марапаттар <em>шежіресі</em>",
+stK:"Тәлімгерлік",stH:"Оқушыларымның <em>жеңістері</em>",
+m1:"I дәреже",m2:"II дәреже",m3:"III дәреже",m4:"мақтау / сертификат",
+gK:"Авторлық цифрлық ресурс",gH:"«Дала жорығы»",gP:"Тарихи стратегия-викторина: жалғыз сарбаздан Ұлы ханға дейін. Әр дұрыс жауап — жаңа әскер.",
+gC:["Геймификация","Функционалдық сауаттылық","3 тіл"],gBtn:"Толық экранда ойнау ↗",gTry:"▶ Ойнап көру",
+lK:"Оқыту сапасы",lH:"Сабақтар <em>сарапшы көзімен</em>",lBtn:"Құжаттар ↗",lBtn2:"Жетістіктер папкасы ↗",
+vH:"Авторлық бейнесабақ",vP:"Жақында",
+fBig:"Тарих — тірі.",fP:"Салиманова Жанылсын Кадиржановна · №81 жалпы білім беретін орта мектеп · 2026",
+all:"Барлығы",dip:"Дипломдар",thx:"Алғыс хаттар",cert:"Сертификаттар",cls:"сынып",
+L:{int:"Халықаралық",rep:"Республикалық",reg:"Облыстық",dis:"Аудандық"}},
+ru:{kick:"Учитель истории · Педагог-исследователь",role:"КГУ «Средняя общеобразовательная школа №81»",
+hi:"Здравствуйте!<br><em>Добро пожаловать.</em>",hi2:"Я не заставляю заучивать историю — я её оживляю.",
+inv:"Отправьтесь со мной<br><em>в путешествие</em><br>сквозь века",go:"Начать путешествие ↓",scroll:"Листайте",
+y1:"VII в. до н.э.",e1n:"Эпоха I",e1t:"Степь саков",y2:"XII в.",e2n:"Эпоха II · Великий Шёлковый путь",e2t:"Туркестан",e3n:"Эпоха III",e3t:"Казахское ханство",e4n:"Эпоха IV",e4t:"Независимый Казахстан",
+er:["Вступление","Саки","Шёлковый путь","Ханство","Независимость"],
+aboutK:"Обо мне",motto:"«Поколение, не знающее прошлого, не может предвидеть будущее»",
+c1:"СОШ №81",c2:"Педагог-исследователь",c3:"История Казахстана и всемирная",c4:"«Лучший учитель – 2026»",
+s1:"качество знаний",s2:"наград",s3:"побед учеников",s4:"уроков · 3/3 балла",
+mK:"Методика",mH:"Мой урок — <em>маленькое исследование</em>",
+qK:"Результат",qH:"Качество знаний <em>растёт</em>",qDoc:"Подтверждающий документ →",
+aK:"Достижения",aH:"<em>Летопись</em> наград",
+stK:"Наставничество",stH:"Победы моих <em>учеников</em>",
+m1:"I степень",m2:"II степень",m3:"III степень",m4:"похвалы / сертификаты",
+gK:"Авторский цифровой ресурс",gH:"«Дала жорығы»",gP:"Историческая стратегия-викторина: от одиночного воина до Великого хана. Каждый верный ответ — новое войско.",
+gC:["Геймификация","Функциональная грамотность","3 языка"],gBtn:"Играть на весь экран ↗",gTry:"▶ Попробовать",
+lK:"Качество преподавания",lH:"Уроки <em>глазами эксперта</em>",lBtn:"Документы ↗",lBtn2:"Папка достижений ↗",
+vH:"Авторский видеоурок",vP:"Скоро",
+fBig:"История жива.",fP:"Салиманова Жанылсын Кадиржановна · КГУ «СОШ №81» · 2026",
+all:"Все",dip:"Дипломы",thx:"Благодарности",cert:"Сертификаты",cls:"класс",
+L:{int:"Международный",rep:"Республиканский",reg:"Областной",dis:"Районный"}}
+};
+const TILES=[["🗺️",["Функционалдық сауаттылық","Карта мен дереккөз — өмірлік тапсырма"],["Функциональная грамотность","Карты и источники — задачи из жизни"]],
+["🎯",["Саралап оқыту","Әр оқушыға — өз биігі"],["Дифференциация","Каждому ученику — своя высота"]],
+["💬",["Кері байланыс","Критерий, дескриптор, өзара бағалау"],["Обратная связь","Критерии, дескрипторы, взаимооценка"]],
+["🤖",["Цифр және ЖИ","ЖИ құралдары мен авторлық ойын"],["Цифра и ИИ","Инструменты ИИ и авторская игра"]],
+["🔬",["Зерттеу","Lesson Study · Action Research"],["Исследование","Lesson Study · Action Research"]],
+["⚖️",["Пікірсайыс","Дәлелдеу және сөйлеу мәдениеті"],["Дебаты","Аргументация и культура речи"]]];
+const YEARS=[["2023",["Олимпиада — I орын","Олимпиада — I место"]],["2024",["Lesson Study, NIS","Lesson Study, NIS"]],["2025",["II орын · халықаралық спикер","II место · международный спикер"]],["2026",["Білім сапасы 89%","Качество знаний 89%"]]];
+const AW=[
+["cert","rep","2025","«ЖИ білім беруде» республикалық семинары","Респ. семинар «ИИ в образовании»"],
+["dip","reg","2023","Облыстық педагогикалық олимпиада — I орын","Областная пед. олимпиада — I место"],
+["dip","reg","2025","Облыстық пәндік олимпиада — II орын","Областная предметная олимпиада — II место"],
+["thx","rep","2025","«Өрлеу»: «SMART-оқыту» курсы","«Өрлеу»: курс «SMART-обучение»"],
+["thx","reg","2025","Инновацияларды БАҚ-та насихаттау","Продвижение инноваций в СМИ"],
+["thx","reg","2023","AMANAT партиясының алғыс хаты","Благодарность партии AMANAT"],
+["thx","reg","2024","Облыстық шебер-класс","Областной мастер-класс"],
+["thx","reg","2025","«Карталардағы Қазақ мемлекеті» шеберханасы","Мастерская «Казахское государство на картах»"],
+["thx","reg","2026","«Пікірсайыс өнері» шеберханасы","Мастерская «Искусство дебатов»"],
+["thx","reg","2024","Lesson Study Kazakhstan конференциясы","Конференция Lesson Study Kazakhstan"],
+["thx","dis","2025","Аудан әкімінің алғыс хаты","Благодарность акима района"],
+["cert","rep","2026","«Мектептегі тарих» республикалық вебинары","Респ. вебинар «История в школе»"],
+["cert","int","2025","«Дарындылық 2.0» конференциясының СПИКЕРІ","СПИКЕР конференции «Одарённость 2.0»"],
+["cert","int","2025","«Дарындылық 2.0» халықаралық конференциясы","Междунар. конференция «Одарённость 2.0»"],
+["cert","reg","2026","«Пікірсайыс өнері» шеберханасы","Мастерская «Искусство дебатов»"],
+["cert","reg","2025","Әдістемелік журналда жарияланым","Публикация в методическом журнале"],
+["cert","rep","2025","«ПолиМат» онлайн марафоны","Онлайн-марафон «ПолиМат»"],
+["cert","rep","2025","«Педагогикалық идеялар панорамасы»","«Панорама педагогических идей»"],
+["cert","reg","2025","Карталар бойынша шеберхана","Мастерская по картам"],
+["cert","reg","2024","NIS: Action Research конференциясы","NIS: конференция Action Research"],
+["cert","reg","2024","Коммуникативтік стратегиялар шебер-класы","Мастер-класс по коммуникативным стратегиям"]];
+const ST=[["Базарбай Самғат","9","rep","2","2025","«Менің шағын Отаным»","«Менің шағын Отаным»"],["Базарбай Самғат","9","reg","1","2025","«Менің өлкемнің символдары»","«Символы моего края»"],["Амандаулер Нұрай","","reg","2","2025","Ғылыми жоба, этномәдениеттану","Научный проект, этнокультуроведение"],["Ерғали Армина","6","reg","3","2025","«Достық-2025»","«Достық-2025»"],["Мейрамбек Сезім","6","reg","3","2025","«Достық-2025»","«Достық-2025»"],["Рамбай Асия","6","reg","3","2025","«Достық-2025»","«Достық-2025»"],["Нұрымбетова Айша","","reg","1","2024","«Достық-2024»","«Достық-2024»"],["Таймасова Айару","","reg","3","2024","«Достық-2024»","«Достық-2024»"],["Алтынбай Айке","6","rep","p","2024","Республикалық интеллектуалдық байқау","Респ. интеллектуальный конкурс"],["Қайрат Қайсар","5","reg","p","2025","«Достық-2025»","«Достық-2025»"],["Сүлеймен Кәусар","6","reg","p","2025","«Достық-2025»","«Достық-2025»"],["Бисенбай Айзере","8","rep","p","2026","«Тарих ата» олимпиадасы","Олимпиада «Тарих ата»"],["Бауржан Інжу","7","rep","p","2026","«Тарих ата» олимпиадасы","Олимпиада «Тарих ата»"],["Әбубәкір Гүлсая","7","rep","p","2026","«Тарих ата» олимпиадасы","Олимпиада «Тарих ата»"],["Ерболова Зафира","7","rep","p","2026","«Тарих ата» олимпиадасы","Олимпиада «Тарих ата»"]];
+const PL={kz:{1:"I дәреже",2:"II дәреже",3:"III дәреже",p:"Қатысушы"},ru:{1:"I степень",2:"II степень",3:"III степень",p:"Участник"}};
+const LS=[["10",["Қазақтардың ру-тайпалық құрылымы","Родоплеменная структура казахов"]],["7",["Абылай ханның саясаты","Политика Абылай хана"]],["6",["Жошы хан тұсындағы Қазақстан","Казахстан в эпоху Джучи"]],["6",["Моңғол шапқыншылығының салдары","Последствия монгольского нашествия"]]];
+
+let lang="kz";try{const s=localStorage.getItem("lang");if(s==="ru"||s==="kz")lang=s}catch(e){}
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],pad=i=>String(i+1).padStart(2,"0");
+function render(){
+  const t=T[lang],K=lang==="kz"?0:1;document.documentElement.lang=K?"ru":"kk";
+  $$("[data-t]").forEach(e=>{const v=t[e.dataset.t];if(typeof v==="string")e.innerHTML=v});
+  $$(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===lang));
+  $("#eras").innerHTML=t.er.map((n,i)=>`<a href="#" data-go="${i}"><span>${n}</span></a>`).join("");
+  $("#tiles").innerHTML=TILES.map(x=>`<div class="tile"><div class="ic">${x[0]}</div><h3>${x[1+K][0]}</h3><p>${x[1+K][1]}</p></div>`).join("");
+  $("#years").innerHTML=YEARS.map(y=>`<div class="yrc"><b>${y[0]}</b><span>${y[1][K]}</span></div>`).join("");
+  $("#fA").innerHTML=[["all",t.all],["dip",t.dip],["thx",t.thx],["cert",t.cert]].map((x,i)=>`<button data-f="${x[0]}" class="${i?"":"on"}">${x[1]}</button>`).join("");
+  $("#gA").innerHTML=AW.map((a,i)=>`<div class="card" data-type="${a[0]}" data-src="img/a${pad(i)}.jpg"><div class="ph" style="background-image:url(img/a${pad(i)}.jpg)"></div><div class="cap"><b><span>${t.L[a[1]]}</span><span>${a[2]}</span></b>${a[3+K]}</div></div>`).join("");
+  $("#gS").innerHTML=ST.map((s,i)=>`<div class="card" data-src="img/s${pad(i)}.jpg"><div class="ph" style="background-image:url(img/s${pad(i)}.jpg)"></div><div class="cap"><b><span>${PL[lang][s[3]]}</span><span>${s[4]}</span></b><strong style="font-family:var(--serif);font-size:17px">${s[0]}</strong>${s[1]?` · ${s[1]} ${t.cls}`:""}<br>${s[5+K]}</div></div>`).join("");
+  $("#ls").innerHTML=LS.map(l=>`<div class="lesson"><div class="cl">${l[0]}</div><h4>${l[1][K]}</h4><span class="score">3/3</span></div>`).join("");
+  $("#gchips").innerHTML=t.gC.map(c=>`<span class="chip">${c}</span>`).join("");
+  $$("#fA button").forEach(b=>b.onclick=()=>{$$("#fA button").forEach(x=>x.classList.toggle("on",x===b));$$("#gA .card").forEach(c=>c.classList.toggle("hide",b.dataset.f!=="all"&&c.dataset.type!==b.dataset.f));$("#gA").scrollLeft=0});
+  $$("#eras a").forEach(a=>a.onclick=e=>{e.preventDefault();const i=+a.dataset.go;const el=i?$$(".scene")[i-1]:$("#intro");scrollTo({top:el.offsetTop+(i?innerHeight*.35:0),behavior:"smooth"})});
+  setTimeout(measure,60);
+}
+$$(".lang button").forEach(b=>b.onclick=()=>{lang=b.dataset.l;try{localStorage.setItem("lang",lang)}catch(e){}render()});
+$$(".navbtns button").forEach(b=>b.onclick=()=>{const s=document.getElementById(b.dataset.s);s.scrollBy({left:+b.dataset.d*s.clientWidth*.8,behavior:"smooth"})});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add("in");
+  el.querySelectorAll("[data-count]").forEach(c=>{const n=+c.dataset.count,suf=c.dataset.suf||"",t0=performance.now();(function st(t){const p=Math.min(1,(t-t0)/1700);c.textContent=Math.round(n*(1-Math.pow(1-p,3)))+suf;if(p<1)requestAnimationFrame(st)})(t0)});
+  el.querySelectorAll(".fill").forEach(f=>f.style.height=f.dataset.h*.8+"%");io.unobserve(el)}),{threshold:.15});
+$$(".rv").forEach(e=>io.observe(e));
+
+$("#gframe .cover").onclick=()=>{const g=$("#gframe");if(!g.querySelector("iframe")){const f=document.createElement("iframe");f.src="https://shyngly29-bit.github.io/dala-zhorygy/";f.title="Дала жорығы";g.prepend(f)}g.classList.add("live")};
+const lb=$("#lb");
+document.addEventListener("click",e=>{const z=e.target.closest(".zoom");if(z){e.preventDefault();lb.querySelector("img").src=z.getAttribute("href");lb.classList.add("on");return}
+  const c=e.target.closest(".card");if(c){lb.querySelector("img").src=c.dataset.src;lb.classList.add("on")}});
+lb.onclick=()=>lb.classList.remove("on");addEventListener("keydown",e=>{if(e.key==="Escape")lb.classList.remove("on")});
+
+/* ============ SCROLL STATE ============ */
+let stages=[];
+function measure(){stages=$$("[data-stage]").map(e=>{const r=e.getBoundingClientRect();return{el:e,top:r.top+scrollY,h:r.height,type:e.dataset.stage,a:+e.dataset.a,b:+(e.dataset.b||0),z0:+(e.dataset.z0||0),z1:+(e.dataset.z1||0),era:e.querySelector(".era")}});
+  stages.forEach((s,i)=>{if(s.type==="trans"){const prev=stages[i-1];s.za=prev?prev.z1:0}})}
+addEventListener("resize",measure);addEventListener("load",measure);new ResizeObserver(measure).observe($("main"));
+const S={a:0,b:1,p:0,za:0,zb:0,era:0};
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const tEl=$("#teacher"),flEl=$("#floor"),say=[$("#s0"),$("#s1"),$("#s2")],cue=$("#cue"),intro=$("#intro");
+tEl.addEventListener("animationend",()=>{tEl.dataset.done=1;tEl.style.opacity=1;onScroll()});
+const band=(p,a,b,f=.06)=>Math.max(0,Math.min(1,(p-a)/f))*Math.max(0,Math.min(1,(b-p)/f));
+function onScroll(){
+  $("#nav").classList.toggle("solid",scrollY>40);
+  // intro choreography
+  const ip=Math.max(0,Math.min(1,scrollY/(intro.offsetHeight-innerHeight)));
+  const o=[ip<.06?1:band(ip,-1,.24),band(ip,.28,.54),band(ip,.58,.86)];
+  say.forEach((s,i)=>{s.style.opacity=o[i];s.style.transform=(innerWidth>900?"translateY(-50%) ":"")+"translateY("+((1-o[i])*24)+"px)";s.style.pointerEvents=o[i]>.5?"auto":"none"});
+  cue.style.opacity=Math.max(0,1-ip*8);
+  const leave=Math.max(0,Math.min(1,(ip-.8)/.2)),come=Math.min(1,ip/.3);
+  const mob=innerWidth<=900;
+  tEl.style.transform=(mob?"translateX(50%) ":"")+`translateX(${-leave*(mob?0:22)}vw) translateY(${leave*4}vh) scale(${(1+come*.06)*(1-leave*.12)}) perspective(900px) rotateY(${-leave*28}deg)`;
+  if(tEl.dataset.done)tEl.style.opacity=(1-leave).toFixed(3);
+  flEl.style.opacity=(1-leave).toFixed(3);
+  if(!stages.length)return;
+  const c=scrollY+innerHeight*.5;let m=stages[0];for(const s of stages)if(c>=s.top)m=s;
+  const t=Math.max(0,Math.min(1,(c-m.top)/m.h));
+  if(m.type==="hold"){S.a=m.a;S.b=m.a;S.p=0;S.za=m.z0+(m.z1-m.z0)*t;S.zb=0;S.era=m.a}
+  else{S.a=m.a;S.b=m.b;S.p=ease(t);S.za=m.za;S.zb=0;S.era=t<.5?m.a:m.b}
+  stages.forEach(s=>{if(s.era){const v=s===m?Math.max(0,(Math.sin(Math.PI*t)-.3)/.7):0;s.era.style.opacity=v.toFixed(2);s.era.style.transform=`scale(${.9+v*.1})`}});
+  $$("#eras a").forEach((a,i)=>a.classList.toggle("on",i===S.era));
+}
+addEventListener("scroll",onScroll,{passive:true});
+render();
+
+/* ============ CINEMATIC WEBGL ============ */
+const SCENES=[
+ {src:"img/library.jpg",asp:1672/941,f:[.925,.60],r:[.93,.68],rs:.55,fx:"beam"},
+ {src:"img/era1.jpg",asp:16/9,f:[.22,.78],r:[.22,.80],rs:.65,fx:"pollen"},
+ {src:"img/era2.jpg",asp:16/9,f:[.74,.52],r:[.97,.44],rs:.4,fx:"sand"},
+ {src:"img/era3.jpg",asp:16/9,f:[.18,.40],r:[.47,.30],rs:.18,fx:"embers"},
+ {src:"img/era4.jpg",asp:16/9,f:[.50,.86],r:[.50,.87],rs:.35,fx:"lights"}
+];
+(function(){
+  const mobile=innerWidth<768||matchMedia("(pointer:coarse)").matches;
+  const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  const lbar=$("#lbar");let loaded=0;
+  const done=()=>{$("#load").classList.add("done");tEl.classList.add("in");measure();onScroll()};
+  if(!window.THREE){done();return}
+  const R=new THREE.WebGLRenderer({antialias:false});R.setPixelRatio(mobile?1:Math.min(devicePixelRatio,1.5));R.setSize(innerWidth,innerHeight);$("#gl").appendChild(R.domElement);
+  const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1),scene=new THREE.Scene();
+  const L=new THREE.TextureLoader();
+  const tex=SCENES.map(s=>{const t=L.load(s.src,()=>{loaded++;lbar.style.width=(loaded/SCENES.length*100)+"%";if(loaded===SCENES.length)setTimeout(done,300)});t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;return t});
+  setTimeout(()=>{if(loaded<SCENES.length)done()},9000);
+  const RS=mobile?8:16;
+  const U={tA:{value:tex[0]},tB:{value:tex[1]},aA:{value:16/9},aB:{value:16/9},scr:{value:innerWidth/innerHeight},
+    fA:{value:new THREE.Vector2()},fB:{value:new THREE.Vector2()},rA:{value:new THREE.Vector2()},rB:{value:new THREE.Vector2()},
+    rsA:{value:0},rsB:{value:0},zA:{value:0},zB:{value:0},p:{value:0},time:{value:0},mouse:{value:new THREE.Vector2()},res:{value:new THREE.Vector2(innerWidth,innerHeight)}};
+  const frag=`
+precision highp float;varying vec2 vUv;
+uniform sampler2D tA,tB;uniform float aA,aB,scr,zA,zB,p,time,rsA,rsB;uniform vec2 fA,fB,rA,rB,mouse,res;
+vec2 sc(float ia){return scr>ia?vec2(1.,ia/scr):vec2(scr/ia,1.);}
+vec3 shot(sampler2D t,float ia,vec2 f,float z,vec2 uv){
+  vec2 u=(uv-.5)*sc(ia)+.5;
+  float d=1.-smoothstep(.0,.62,u.y);           // bottom = near
+  u=f+(u-f)/(1.+z*(1.+d*.45));                  // dolly: near layers grow faster
+  u+=mouse*(.004+.02*d)+vec2(sin(time*.17),cos(time*.13))*.0025*(.4+d);
+  u.y+=sin(u.x*9.+time*.6)*.0007*d;             // heat shimmer on ground
+  return texture2D(t,clamp(u,.001,.999)).rgb;
+}
+vec2 toScr(vec2 f,float ia){return (f-.5)/sc(ia)+.5;}
+float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+vec3 rays(sampler2D t,float ia,vec2 f,float z,vec2 r,float s){
+  if(s<.01)return vec3(0.);
+  vec2 rp=toScr(r,ia);vec2 dlt=(vUv-rp)/float(${RS});vec2 uv=vUv;vec3 acc=vec3(0.);float w=1.;
+  for(int i=0;i<${RS};i++){uv-=dlt;vec3 c=shot(t,ia,f,z,uv);float l=max(0.,dot(c,vec3(.3,.59,.11))-.62);acc+=c*l*w;w*=.93;}
+  return acc/float(${RS})*s*2.6;
+}
+void main(){
+  float tb=sin(3.14159*p);
+  vec3 a,b;
+  if(p<.001){a=shot(tA,aA,fA,zA,vUv);a+=rays(tA,aA,fA,zA,rA,rsA);b=a;}
+  else{
+    a=vec3(0.);b=vec3(0.);
+    for(int i=0;i<10;i++){float k=float(i)/9.;
+      a+=shot(tA,aA,fA,zA+p*2.6+tb*k*.55,vUv);
+      b+=shot(tB,aB,fB,zB+(1.-p)*1.6+tb*k*.55,vUv);}
+    a/=10.;b/=10.;
+    a+=rays(tA,aA,fA,zA+p*2.6,rA,rsA*(1.-p));b+=rays(tB,aB,fB,zB+(1.-p)*1.6,rB,rsB*p);
+  }
+  float m=smoothstep(.36,.66,p);
+  vec3 c=mix(a,b,m);
+  float ab=tb*.004;                                       // chromatic split during flight
+  c.r=mix(c.r,c.r*1.04,tb);c.b*=1.-tb*.06;
+  c+=vec3(1.,.82,.55)*pow(tb,7.)*1.1;                       // portal flash
+  vec2 q=vUv-.5;c*=1.-.55*pow(length(q*vec2(1.,.85))*1.35,2.2);  // vignette
+  c=c*1.04-.015;c=pow(max(c,0.),vec3(.97,1.,1.04));        // grade
+  c+=(hash(vUv*res+fract(time)*100.)-.5)*.04;              // film grain
+  gl_FragColor=vec4(c,1.);
+}`;
+  const mat=new THREE.ShaderMaterial({uniforms:U,vertexShader:"varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position,1.);}",fragmentShader:frag,depthTest:false});
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),mat));
+
+  /* particles (2D canvas) */
+  const fx=$("#fx"),g=fx.getContext("2d");let W,H;
+  function size(){W=fx.width=innerWidth*(mobile?1:1.5);H=fx.height=innerHeight*(mobile?1:1.5);R.setSize(innerWidth,innerHeight);U.scr.value=innerWidth/innerHeight;U.res.value.set(innerWidth,innerHeight)}
+  size();addEventListener("resize",size);
+  const P=[];const MAX=mobile?90:200;
+  function spawn(kind){const s=SCENES.find(x=>x.fx===kind)||SCENES[0];const o={k:kind,life:0};
+    if(kind==="beam"){o.x=W*(.45+Math.random()*.45);o.y=H*Math.random();o.vx=(Math.random()-.5)*.15;o.vy=(Math.random()-.5)*.12;o.r=Math.random()*1.8+.4;o.c="255,214,150";o.max=600}
+    if(kind==="pollen"){o.x=-10;o.y=H*(.3+Math.random()*.7);o.vx=.4+Math.random()*1.1;o.vy=(Math.random()-.5)*.25;o.r=Math.random()*2+.5;o.c="255,226,160";o.max=900;if(Math.random()<.5)o.x=Math.random()*W}
+    if(kind==="sand"){o.x=W+10;o.y=H*(.35+Math.random()*.65);o.vx=-(2+Math.random()*4);o.vy=(Math.random()-.4)*.4;o.r=Math.random()*1.4+.3;o.c="240,190,120";o.max=500;o.streak=1;if(Math.random()<.5)o.x=Math.random()*W}
+    if(kind==="embers"){o.x=W*(.47+(Math.random()-.5)*.06);o.y=H*(.72+Math.random()*.04);o.vx=(Math.random()-.5)*.6;o.vy=-(.6+Math.random()*1.6);o.r=Math.random()*2+.6;o.c="255,150,60";o.max=260;o.glow=1}
+    if(kind==="lights"){o.x=Math.random()*W;o.y=H*Math.random()*.75;o.vx=0;o.vy=-.05;o.r=Math.random()*1.6+.4;o.c=Math.random()<.7?"255,220,140":"160,210,255";o.max=300;o.tw=1}
+    P.push(o)}
+  /* mouse */
+  const mo={x:0,y:0,tx:0,ty:0};
+  addEventListener("pointermove",e=>{mo.tx=(e.clientX/innerWidth-.5);mo.ty=-(e.clientY/innerHeight-.5)});
+  const cur={za:0,zb:0,p:0};
+  function loop(ms){
+    const t=ms*.001,k=still?1:.085;
+    mo.x+=(mo.tx-mo.x)*.05;mo.y+=(mo.ty-mo.y)*.05;
+    cur.za+=(S.za-cur.za)*k;cur.zb+=(S.zb-cur.zb)*k;
+    const jump=Math.abs(S.p-cur.p)>.6;cur.p=jump?S.p:cur.p+(S.p-cur.p)*k;
+    const A=SCENES[S.a],B=SCENES[S.b];
+    U.tA.value=tex[S.a];U.tB.value=tex[S.b];U.aA.value=A.asp;U.aB.value=B.asp;
+    U.fA.value.set(A.f[0],A.f[1]);U.fB.value.set(B.f[0],B.f[1]);U.rA.value.set(A.r[0],A.r[1]);U.rB.value.set(B.r[0],B.r[1]);
+    U.rsA.value=A.rs*(.85+.15*Math.sin(t*.8));U.rsB.value=B.rs;
+    U.zA.value=cur.za;U.zB.value=cur.zb;U.p.value=still?(S.p>.5?1:0):cur.p;U.time.value=t;U.mouse.value.set(mo.x,mo.y);
+    R.render(scene,cam);
+    /* particles */
+    const kind=SCENES[cur.p>.5?S.b:S.a].fx;
+    g.clearRect(0,0,W,H);
+    if(!still){
+      const want=kind==="embers"?.9:kind==="sand"?.7:.35;if(P.length<MAX&&Math.random()<want*3)spawn(kind);
+      const fl=Math.sin(Math.PI*cur.p);
+      for(let i=P.length-1;i>=0;i--){const o=P[i];o.life++;
+        if(o.k!==kind){o.life+=6}
+        o.x+=o.vx*(1+fl*6)+mo.x*.3;o.y+=o.vy*(1+fl*6);if(o.k==="embers"){o.vx+=(Math.random()-.5)*.08}
+        const a=Math.min(1,o.life/40)*Math.max(0,1-o.life/o.max)*(o.tw?(.5+.5*Math.sin(t*4+o.x)):1);
+        if(a<=0||o.x<-30||o.x>W+30||o.y<-30||o.y>H+30){P.splice(i,1);continue}
+        g.globalAlpha=a;
+        if(o.streak||fl>.2){g.strokeStyle=`rgba(${o.c},1)`;g.lineWidth=o.r;g.beginPath();g.moveTo(o.x,o.y);g.lineTo(o.x-o.vx*(4+fl*30),o.y-o.vy*(4+fl*30));g.stroke()}
+        else{if(o.glow){const gr=g.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r*5);gr.addColorStop(0,`rgba(${o.c},1)`);gr.addColorStop(1,`rgba(${o.c},0)`);g.fillStyle=gr;g.beginPath();g.arc(o.x,o.y,o.r*5,0,7);g.fill()}
+          g.fillStyle=`rgba(${o.c},1)`;g.beginPath();g.arc(o.x,o.y,o.r,0,7);g.fill()}
+      }
+      g.globalAlpha=1;
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
