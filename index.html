@@ -73,8 +73,7 @@ h1 em,.big em{font-style:italic;color:var(--gold2);font-weight:500}
 .era .yr{font-family:var(--serif);font-size:clamp(80px,15vw,210px);line-height:1;color:#fff6e0;font-style:italic;text-shadow:0 0 70px rgba(255,205,130,.85),0 4px 30px rgba(0,0,0,.4)}
 .era .nm{font-size:13px;letter-spacing:.45em;text-transform:uppercase;margin-top:8px;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .era .t2{font-family:var(--serif);font-size:clamp(28px,3.8vw,50px);text-shadow:0 2px 18px rgba(0,0,0,.8)}
-.scene{padding:70vh 0 40vh}
-.scene .panel + .panel{margin-top:70vh}
+.scene{padding:45vh 0 10vh}
 .panel{background:var(--glass);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%);border:1px solid var(--line);border-radius:28px;padding:clamp(26px,4.5vw,58px);box-shadow:0 40px 100px -40px rgba(0,0,0,.8)}
 h2{font-family:var(--serif);font-weight:600;font-size:clamp(40px,5vw,70px);line-height:1;margin:12px 0 18px}
 h2 em{font-style:italic;color:var(--gold2);font-weight:500}
@@ -158,6 +157,8 @@ footer p{opacity:.75;font-size:13px;margin-top:18px;text-shadow:0 2px 10px #000}
 #lb .x{position:absolute;top:18px;right:26px;font-size:34px}
 
 .panel{position:relative}
+.pin{position:relative}
+.pin>.panel{position:sticky;top:var(--top,12vh);will-change:transform,opacity;opacity:0}
 .panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,228,170,.16),transparent 45%);opacity:var(--go,0);transition:opacity .4s}
 .card{transition:transform .3s ease-out,opacity .3s}
 .card:hover{transform:none}
@@ -400,22 +401,34 @@ function render(){
   $$("#fA button").forEach(b=>b.onclick=()=>{$$("#fA button").forEach(x=>x.classList.toggle("on",x===b));$$("#gA .card").forEach(c=>c.classList.toggle("hide",b.dataset.f!=="all"&&c.dataset.type!==b.dataset.f));$("#gA").scrollLeft=0;flow($("#gA"))});
   $$("#eras a").forEach(a=>a.onclick=e=>{e.preventDefault();const i=+a.dataset.go;const el=i?$$(".scene")[i-1]:$("#intro");scrollTo({top:el.offsetTop+(i?innerHeight*.35:0),behavior:"smooth"})});
   ["#gA","#gS"].forEach(id=>{const s=$(id);s.onscroll=()=>requestAnimationFrame(()=>flow(s));setTimeout(()=>flow(s),80)});
-  setTimeout(measure,60);
+  setTimeout(()=>{if(window.layoutPins)layoutPins();measure()},60);
 }
 /* 3D coverflow for award / student strips */
 function flow(s){const r=s.getBoundingClientRect();if(!r.width)return;const c=r.left+r.width/2;
   for(const k of s.children){if(k.classList.contains("hide"))continue;const b=k.getBoundingClientRect(),o=Math.max(-1,Math.min(1,(b.left+b.width/2-c)/(r.width/2)));
     k.style.transform=`perspective(900px) rotateY(${(-o*32).toFixed(1)}deg) translateZ(${(-Math.abs(o)*90).toFixed(0)}px) scale(${(1-Math.abs(o)*.06).toFixed(3)})`;k.style.opacity=(1-Math.abs(o)*.3).toFixed(2)}}
 addEventListener("resize",()=>["#gA","#gS"].forEach(id=>flow($(id))));
-/* 3D tilt + glare on panels */
+/* pinned panels: each panel holds still while being read, then hands over to the next */
 const coarse=matchMedia("(pointer:coarse)").matches;
-function tilt(){ $$(".panel").forEach(p=>{
-  p.addEventListener("pointermove",e=>{if(coarse||!p.classList.contains("in"))return;const r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-    p.style.transition="transform .25s ease-out,opacity 1.2s,filter 1.2s";p.style.transform=`perspective(1400px) rotateX(${((.5-y)*5).toFixed(2)}deg) rotateY(${((x-.5)*7).toFixed(2)}deg)`;
-    p.style.setProperty("--gx",(x*100).toFixed(1)+"%");p.style.setProperty("--gy",(y*100).toFixed(1)+"%");p.style.setProperty("--go",1)});
-  p.addEventListener("pointerleave",()=>{p.style.transition="transform .9s cubic-bezier(.2,.8,.2,1),opacity 1.2s,filter 1.2s";p.style.transform="";p.style.setProperty("--go",0)});
-});}
-tilt();
+const PANELS=$$(".panel");
+PANELS.forEach(p=>{const w=document.createElement("div");w.className="pin";p.before(w);w.appendChild(p);p.classList.remove("rv");
+  p._rx=p._ry=p._tx=p._ty=0;
+  p.addEventListener("pointermove",e=>{if(coarse)return;const r=p.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    p._tx=(.5-y)*5;p._ty=(x-.5)*7;p.style.setProperty("--gx",(x*100).toFixed(1)+"%");p.style.setProperty("--gy",(y*100).toFixed(1)+"%");p.style.setProperty("--go",1)});
+  p.addEventListener("pointerleave",()=>{p._tx=p._ty=0;p.style.setProperty("--go",0)});
+});
+function layoutPins(){const H=innerHeight;PANELS.forEach(p=>{const h=p.offsetHeight,pin=p.parentNode;
+  const top=h<H-140?(H-h)/2+24:H-h-28;pin.style.setProperty("--top",top+"px");pin.style.height=(h+H*(h<H-140?1.1:.85))+"px"})}
+addEventListener("resize",layoutPins);addEventListener("load",()=>{layoutPins();measure()});document.fonts&&document.fonts.ready.then(()=>{layoutPins();measure()});
+const clamp01=v=>Math.max(0,Math.min(1,v));
+(function pins(){const H=innerHeight;
+  PANELS.forEach(p=>{const r=p.parentNode.getBoundingClientRect();if(r.bottom<-50||r.top>H+50){if(p.style.opacity!=="0")p.style.opacity=0;return}
+    const en=clamp01((H-r.top)/(H*.5)),ex=clamp01((r.bottom-H*.12)/(H*.38)),v=Math.min(en,ex);
+    p._rx+=(p._tx-p._rx)*.12;p._ry+=(p._ty-p._ry)*.12;
+    const ty=(1-en)*90-(1-ex)*70,rx=(1-en)*16-(1-ex)*10+p._rx;
+    p.style.opacity=v.toFixed(3);p.style.transform=`perspective(1400px) translateY(${ty.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg) rotateY(${p._ry.toFixed(2)}deg) scale(${(.93+.07*v).toFixed(3)})`;
+    if(v>.6&&!p.classList.contains("in")){p.classList.add("in");io.observe(p)}});
+  requestAnimationFrame(pins)})();
 $$(".lang button").forEach(b=>b.onclick=()=>{lang=b.dataset.l;try{localStorage.setItem("lang",lang)}catch(e){}render()});
 $$(".navbtns button").forEach(b=>b.onclick=()=>{const s=document.getElementById(b.dataset.s);s.scrollBy({left:+b.dataset.d*s.clientWidth*.8,behavior:"smooth"})});
 
@@ -575,7 +588,7 @@ void main(){
   addEventListener("pointermove",e=>{mo.tx=(e.clientX/innerWidth-.5);mo.ty=-(e.clientY/innerHeight-.5)});
   const cur={za:0,zb:0,p:0};
   function loop(ms){
-    const t=ms*.001,k=still?1:.085;
+    const t=ms*.001,k=still?1:.17;
     mo.x+=(mo.tx-mo.x)*.05;mo.y+=(mo.ty-mo.y)*.05;
     cur.za+=(S.za-cur.za)*k;cur.zb+=(S.zb-cur.zb)*k;
     const jump=Math.abs(S.p-cur.p)>.6;cur.p=jump?S.p:cur.p+(S.p-cur.p)*k;
