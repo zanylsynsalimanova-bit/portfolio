@@ -413,7 +413,7 @@ lb.onclick=()=>lb.classList.remove("on");addEventListener("keydown",e=>{if(e.key
 /* ============ SCROLL STATE ============ */
 let stages=[];
 function measure(){stages=$$("[data-stage]").map(e=>{const r=e.getBoundingClientRect();return{el:e,top:r.top+scrollY,h:r.height,type:e.dataset.stage,a:+e.dataset.a,b:+(e.dataset.b||0),z0:+(e.dataset.z0||0),z1:+(e.dataset.z1||0),era:e.querySelector(".era")}});
-  stages.forEach((s,i)=>{if(s.type==="trans"){const prev=stages[i-1];s.za=prev?prev.z1:0}})}
+  stages.forEach((s,i)=>{if(s.type==="trans"){const prev=stages[i-1];s.za=prev?prev.z1:0}});onScroll()}
 addEventListener("resize",measure);addEventListener("load",measure);new ResizeObserver(measure).observe($("main"));
 const S={a:0,b:1,p:0,za:0,zb:0,era:0};
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
