@@ -80,7 +80,9 @@ h1 em{font-style:italic;color:var(--gold2);font-weight:500}
 
 /* pinned compact panels */
 .pin{position:relative}
-.pin>*{position:sticky;top:var(--top,14vh);will-change:transform,opacity;opacity:0}
+.pin>*,.pin>.panel{position:sticky;top:var(--top,14vh);will-change:transform,opacity;opacity:0}
+.pin>.panel{max-height:calc(100vh - 96px);max-height:calc(100svh - 96px);overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:thin;scrollbar-color:rgba(201,160,90,.6) transparent}
+.pin>.panel::-webkit-scrollbar{width:6px}.pin>.panel::-webkit-scrollbar-thumb{background:rgba(201,160,90,.6);border-radius:6px}
 .panel{position:relative;border-radius:16px;padding:clamp(22px,3.4vw,40px);max-width:min(780px,62vw);
   background:var(--dark);border:1px solid rgba(201,160,90,.45);box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
 .panel.wide{max-width:none}
@@ -640,8 +642,17 @@ let stages=[],pins=[];
 function measure(){const y=scrollY;stages=$$("[data-stage]").map(e=>{const r=e.getBoundingClientRect();return{el:e,top:r.top+y,h:r.height,type:e.dataset.stage,a:+e.dataset.a,b:+(e.dataset.b||0),z0:+(e.dataset.z0||0),z1:+(e.dataset.z1||0),era:e.querySelector(".era")}});
   stages.forEach((s,i)=>{if(s.type==="trans"){const p=stages[i-1];s.za=p?p.z1:0}});onScroll()}
 function layoutPins(){const H=innerHeight,y=scrollY;pins=$$(".pin").map(pin=>{const p=pin.firstElementChild,h=p.offsetHeight;
-  const top=h<H-130?Math.max(70,(H-h)/2):H-h-24;pin.style.setProperty("--top",top+"px");pin.style.height=(h+H*(h<H-130?.95:.75))+"px";
+  const top=Math.max(70,(H-h)/2+10);pin.style.setProperty("--top",top+"px");pin.style.height=(h+H*.85)+"px";pin.style.marginBottom=(H*.75)+"px";
   return{pin,p,h,top}});pins.forEach(o=>{o.abs=o.pin.getBoundingClientRect().top+y;o.ph=o.pin.offsetHeight})}
+/* scroll snap: a panel stopped near the centre locks into place; farther away = free scrolling */
+let snapT=0,progUntil=0,touching=false;const markProg=(ms=1700)=>{progUntil=performance.now()+ms};
+function doSnap(){if(touching||performance.now()<progUntil||document.documentElement.style.overflow==="hidden"||!pins.length)return;
+  const H=innerHeight,y=scrollY;let best=null,bd=1e9;
+  for(const o of pins){const p=o.abs-o.top+(o.ph-o.h)*.5,d=p-y;if(Math.abs(d)<Math.abs(bd)){bd=d;best=p}}
+  if(best!==null&&Math.abs(bd)>6&&Math.abs(bd)<H*.33){markProg(900);scrollTo({top:best,behavior:reduce?"auto":"smooth"})}}
+addEventListener("scroll",()=>{clearTimeout(snapT);snapT=setTimeout(doSnap,170)},{passive:true});
+addEventListener("touchstart",()=>touching=true,{passive:true});
+addEventListener("touchend",()=>{touching=false;clearTimeout(snapT);snapT=setTimeout(doSnap,320)},{passive:true});
 addEventListener("resize",()=>{layoutPins();measure()});addEventListener("load",()=>{layoutPins();measure()});document.fonts&&document.fonts.ready.then(()=>{layoutPins();measure()});
 let roT=0;new ResizeObserver(()=>{cancelAnimationFrame(roT);roT=requestAnimationFrame(()=>{layoutPins();measure()})}).observe($("main"));
 const S={a:0,b:0,p:0,za:0,zb:0,era:0,t:0};
@@ -661,10 +672,10 @@ let lastEra=-1;
 function updateNav(){if(S.era===lastEra&&$("#rail").children.length&&$("#rail .on"))return;lastEra=S.era;const ri=RAIL.findIndex(r=>r.includes(S.era));
   $$("#rail button,#pillList button").forEach(b=>b.classList.toggle("on",+b.dataset.go===ri));
   $("#pillBtn").textContent=RN[ri]+" · "+T[lang].er[ri]+" ▾"}
-function goEra(i){const el=$(RAILEL[i]);scrollTo({top:i?el.offsetTop+innerHeight*.05:0,behavior:reduce?"auto":"smooth"});$("#railpill").classList.remove("open")}
+function goEra(i){markProg(2600);const el=$(RAILEL[i]);scrollTo({top:i?el.offsetTop+innerHeight*.05:0,behavior:reduce?"auto":"smooth"});$("#railpill").classList.remove("open")}
 document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){e.preventDefault();goEra(+g.dataset.go)}});
 $("#pillBtn").onclick=()=>{const r=$("#railpill");r.classList.toggle("open");$("#pillBtn").setAttribute("aria-expanded",r.classList.contains("open"))};
-$("#startBtn").onclick=()=>scrollTo({top:$("#p1").offsetTop-innerHeight*.3,behavior:reduce?"auto":"smooth"});
+$("#startBtn").onclick=()=>markProg(2600)||scrollTo({top:$("#p1").offsetTop-innerHeight*.3,behavior:reduce?"auto":"smooth"});
 
 /* pinned panel choreography — reads cached geometry only (no layout thrash) */
 const countUp=el=>{if(el.dataset.done)return;el.dataset.done=1;el.querySelectorAll("[data-count]").forEach(c=>{const n=+c.dataset.count,suf=c.dataset.suf||"";if(reduce)return;const t0=performance.now();(function st(t){const p=Math.min(1,(t-t0)/1100);c.textContent=Math.round(n*(.35+.65*(1-Math.pow(1-p,3))))+suf;if(p<1)requestAnimationFrame(st)})(t0)});
@@ -697,7 +708,7 @@ const TOUR=[()=>0,()=>pinMid("#lesson"),()=>pinMid("#quality"),()=>pinMid("#awar
 function pinMid(sel){const o=pins.find(x=>x.p===$(sel));return o?o.abs-o.top+(o.ph-o.h)*.3:0}
 function tourShow(){const st=T[lang].tourSteps;$("#tdots").innerHTML=st.map((_,i)=>`<i class="${i===tI?"on":""}"></i>`).join("");
   $("#tstep").innerHTML=`<b>${tI+1}/4 · ${st[tI][0]}</b> · ~${st[tI][1]}`;$("#tPrev").disabled=tI===0}
-function tourGo(i){tI=Math.max(0,Math.min(3,i));tourShow();scrollTo({top:TOUR[tI](),behavior:reduce?"auto":"smooth"});
+function tourGo(i){markProg(3000);tI=Math.max(0,Math.min(3,i));tourShow();scrollTo({top:TOUR[tI](),behavior:reduce?"auto":"smooth"});
   $$(".card.key").forEach(c=>c.classList.remove("key"));
   if(tI===3){$$("#fA button")[0].click();const cs=$$("#gA .card");[1,12].forEach(k=>cs[k]&&cs[k].classList.add("key"));setTimeout(()=>{const s=$("#gA"),c=cs[1];s.scrollTo({left:c.offsetLeft-s.clientWidth/2+c.offsetWidth/2,behavior:"smooth"})},900)}}
 function tourStart(){tourOn=true;document.body.classList.add("touring");$("#tour").classList.add("on");tourGo(0)}
@@ -721,7 +732,7 @@ function vSet(i,animateFrom){vI=(i+vList.length)%vList.length;const it=vList[vI]
   $("#vPrev").style.display=$("#vNext").style.display=vList.length>1?"":"none"}
 function vOpen(list,i,fromEl){vList=list;vFrom=fromEl;vScrollY=scrollY;lb.classList.add("on");lb.classList.remove("opened");document.documentElement.style.overflow="hidden";
   vSet(i,fromEl&&fromEl.getBoundingClientRect());setTimeout(()=>lb.classList.add("opened"),700);$("#vClose").focus({preventScroll:true})}
-function vClose(){lb.classList.remove("on","opened");document.documentElement.style.overflow="";scrollTo(0,vScrollY);
+function vClose(){markProg(600);lb.classList.remove("on","opened");document.documentElement.style.overflow="";scrollTo(0,vScrollY);
   const card=vFrom&&vFrom.closest(".card");if(card){const s=card.parentNode;s.scrollTo({left:card.offsetLeft-s.clientWidth/2+card.offsetWidth/2});card.focus({preventScroll:true})}}
 function openCard(c){const cards=[...c.parentNode.children].filter(k=>!k.classList.contains("hide"));
   vOpen(cards.map(k=>({src:k.dataset.src,hi:k.dataset.hi,title:k.dataset.title,year:k.dataset.year})),cards.indexOf(c),c.querySelector(".ph"))}
