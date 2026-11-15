@@ -80,7 +80,7 @@ h1 em{font-style:italic;color:var(--gold2);font-weight:500}
 
 /* pinned compact panels */
 .pin{position:relative}
-.pin>.panel{position:sticky;top:var(--top,14vh);will-change:transform,opacity;opacity:0}
+.pin>*{position:sticky;top:var(--top,14vh);will-change:transform,opacity;opacity:0}
 .panel{position:relative;border-radius:16px;padding:clamp(22px,3.4vw,40px);max-width:min(780px,62vw);
   background:var(--dark);border:1px solid rgba(201,160,90,.45);box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
 .panel.wide{max-width:none}
@@ -179,6 +179,11 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 /* ===== archive viewer ===== */
 #lb{position:fixed;inset:0;z-index:200;display:none;background:radial-gradient(ellipse at 50% 100%,rgba(90,60,15,.5),rgba(6,4,2,.97) 60%)}
 #lb.on{display:block}
+#lb .abg{position:absolute;inset:-24px;background:#120b06 url(img/archive-bg.jpg) center/cover;filter:blur(7px) brightness(.48) saturate(1.1);pointer-events:none}
+#vdoc::after{content:"";position:absolute;inset:4px;border:2px solid #c9984a;border-radius:4px;pointer-events:none;background:var(--corners);
+  box-shadow:0 0 0 1px rgba(255,220,150,.35),0 0 34px rgba(255,190,90,.55),inset 0 0 20px rgba(255,190,90,.25)}
+.vzoom{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;display:flex;gap:6px;background:rgba(13,9,6,.82);border:1px solid var(--gold);border-radius:30px;padding:5px}
+.vzoom .vbtn{border:0;min-width:40px}
 #lb .beam{position:absolute;bottom:0;left:50%;width:min(90vw,900px);height:96vh;transform:translateX(-50%);background:linear-gradient(0deg,rgba(255,205,120,.36),rgba(255,205,120,.05) 70%,transparent);clip-path:polygon(43% 100%,57% 100%,100% 0,0 0);filter:blur(6px);pointer-events:none;transition:opacity 1.2s}
 #lb.opened .beam{opacity:.18}
 #lb .bgdim{position:absolute;inset:0;background:#050302;opacity:0;transition:opacity 1.2s;pointer-events:none}
@@ -188,15 +193,67 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 .vbar .ttl small{font-family:var(--sans);font-size:12px;color:var(--gold2);margin-left:8px}
 .vbtn{min-width:38px;height:38px;border-radius:20px;border:1px solid var(--gold);background:rgba(13,9,6,.7);color:var(--gold2);font-size:15px;cursor:pointer;padding:0 12px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .vbtn:hover{background:var(--gold);color:var(--ink)}
-#vscroll{position:absolute;inset:62px 70px 18px;overflow:auto;display:flex;align-items:flex-start;justify-content:center;overscroll-behavior:contain;touch-action:pan-x pan-y}
+#vscroll{position:absolute;inset:62px 70px 74px;overflow:auto;display:flex;align-items:flex-start;justify-content:center;overscroll-behavior:contain;touch-action:pan-x pan-y}
 #vscroll.fit{align-items:center}
-#vdoc{position:relative;margin:auto;transform-origin:50% 50%}
+#vdoc{position:relative;margin:auto;padding:20px;transform-origin:50% 50%}
 #vdoc img{display:block;height:auto;max-width:none;border:1px solid #d9a25a;box-shadow:0 0 0 4px rgba(217,162,90,.15),0 0 40px rgba(255,180,80,.35);background:#fff;user-select:none;-webkit-user-drag:none}
-#vdoc .sweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 0%,rgba(255,228,170,.55) 50%,transparent 100%) 0 -120%/100% 30% no-repeat;animation:sw 1.3s ease-out .35s forwards;mix-blend-mode:screen}
+#vdoc .sweep{position:absolute;inset:20px;pointer-events:none;background:linear-gradient(transparent 0%,rgba(255,228,170,.55) 50%,transparent 100%) 0 -120%/100% 30% no-repeat;animation:sw 1.3s ease-out .35s forwards;mix-blend-mode:screen}
 @keyframes sw{to{background-position:0 220%}}
 .varr{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);background:rgba(13,9,6,.7);color:var(--gold2);font-size:24px;cursor:pointer}
 .varr.prev{left:12px}.varr.next{right:12px}
 .varr:hover{background:var(--gold);color:var(--ink)}
+
+/* goal — 3D orbit infographic */
+.goaltxt{font-family:var(--serif);font-size:clamp(20px,1.9vw,27px);line-height:1.3;font-style:italic;max-width:900px;margin-top:6px}
+.goaltxt em{color:var(--gold2)}
+.g3d{position:relative;height:340px;perspective:1100px;margin-top:6px}
+.g3s{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.gcore{position:absolute;left:-74px;top:-74px;width:148px;height:148px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;
+  background:radial-gradient(circle at 35% 30%,#fff3cf,#e2b25e 38%,#7a4a18 100%);color:#2b1a0d;box-shadow:0 0 50px rgba(255,190,90,.65),0 0 120px rgba(255,170,60,.3),inset 0 -10px 24px rgba(60,30,5,.5)}
+.gcore svg{width:34px;height:34px;fill:none;stroke:#3a2208;stroke-width:1.6}
+.gcore b{font-size:12.5px;line-height:1.2;padding:0 14px;font-weight:600}
+.gring{position:absolute;left:-250px;top:-250px;width:500px;height:500px;border-radius:50%;border:1px solid rgba(236,210,154,.45);transform:rotateX(90deg);box-shadow:0 0 18px rgba(236,210,154,.25)}
+.gring.r2{left:-180px;top:-180px;width:360px;height:360px;border-style:dashed;opacity:.6}
+.gbeam{position:absolute;left:0;top:-1px;width:250px;height:2px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,220,150,.9),rgba(255,220,150,.1));box-shadow:0 0 8px rgba(255,200,120,.8)}
+.gnode{position:absolute;left:-110px;top:-58px;width:220px;padding:14px 14px 12px;border-radius:12px;background:rgba(20,13,8,.92);border:1px solid var(--gold);text-align:center;box-shadow:0 18px 40px -16px rgba(0,0,0,.9),0 0 22px rgba(255,190,90,.18)}
+.gnode svg{width:30px;height:30px;fill:none;stroke:var(--gold2);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.gnode b{display:block;font-family:var(--serif);font-size:19px;line-height:1.15;margin-top:4px}
+.gnode span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);margin-top:2px}
+/* 3D bars */
+.bars{transform:perspective(900px) rotateX(12deg) rotateY(-16deg);transform-style:preserve-3d;padding-right:16px}
+.bar .fill{position:relative;border-radius:0}
+.bar .fill::before{content:"";position:absolute;left:7px;right:-7px;top:-14px;height:14px;background:#efc979;transform:skewX(-45deg);transform-origin:bottom}
+.bar .fill::after{content:"";position:absolute;top:-7px;right:-14px;width:14px;bottom:7px;background:linear-gradient(180deg,#a8742e,#4a270c);transform:skewY(-45deg);transform-origin:left}
+.bar .pct{transform:translateZ(20px)}
+/* 3D podium */
+.medals{perspective:900px;align-items:end}
+.medal{transform:rotateX(14deg);transform-origin:bottom;position:relative;box-shadow:0 14px 20px -10px rgba(0,0,0,.7)}
+.medal::after{content:"";position:absolute;left:0;right:0;top:-12px;height:12px;background:inherit;filter:brightness(1.25);transform:skewX(-35deg);transform-origin:bottom;border-radius:3px 3px 0 0}
+.medal.g{padding-top:26px}.medal.s{padding-top:18px}.medal.b{padding-top:12px}
+@media (max-width:900px){.g3d{height:300px}.gring{left:-150px;top:-150px;width:300px;height:300px}.gring.r2{display:none}.gbeam{width:150px}.gcore{transform:scale(.8)}.gnode{width:150px;left:-75px;padding:10px}.gnode b{font-size:15px}}
+
+/* Otrar 1219 chapter */
+.ottl{max-width:min(420px,32vw);text-shadow:0 4px 30px rgba(0,0,0,.85)}
+.ottl .otH{font-size:clamp(40px,4.6vw,68px);line-height:.98}
+.otcap{font-size:12px;letter-spacing:.08em;margin-top:14px;opacity:.9;border-top:1px solid var(--gold);padding-top:8px;display:inline-block}
+.srcs{margin-top:16px;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.srcs summary{cursor:pointer;font-weight:500;color:var(--gold2);font-size:14px}
+.srcs .ev{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:13.5px}
+.srcs .ev b{display:block;font-family:var(--serif);font-size:18px}
+.srcs .ev span{display:inline-block;font-size:11px;letter-spacing:.08em;border:1px solid var(--gold);border-radius:12px;padding:1px 8px;margin:4px 6px 2px 0;color:var(--gold2)}
+.otnext{margin-top:14px;font-size:13px;display:flex;gap:8px;align-items:center;opacity:.9}
+.otnext::before{content:"VR";font-size:10px;font-weight:700;letter-spacing:.1em;border:1px solid var(--gold);border-radius:6px;padding:3px 6px;color:var(--gold2)}
+#rv{position:fixed;inset:0;z-index:215;display:none;align-items:center;justify-content:center;background:rgba(6,4,2,.94)}
+#rv.on{display:flex}
+#rv video{max-width:94vw;max-height:84vh;border:1px solid #d9a25a;box-shadow:0 0 50px rgba(255,180,80,.3);background:#000}
+#rv .vbtn{position:absolute;top:14px;right:14px}
+.mcap{position:fixed;left:50%;bottom:10vh;transform:translateX(-50%);z-index:3;pointer-events:none;background:rgba(13,9,6,.78);border:1px solid var(--gold);border-radius:30px;padding:8px 18px;font-size:13px;letter-spacing:.06em;color:var(--gold2);white-space:nowrap}
+/* caravan layer (Silk Road) */
+#caravan{position:fixed;left:0;bottom:7vh;height:15vh;z-index:1;pointer-events:none;display:flex;align-items:flex-end;gap:.6vh;opacity:0;will-change:transform,opacity;filter:brightness(.92) contrast(1.05) drop-shadow(0 10px 8px rgba(40,20,5,.35))}
+#caravan img{height:100%;width:auto;max-width:none;transform-origin:50% 100%;animation:gait 1.05s ease-in-out infinite}
+#caravan img:nth-child(2){animation-delay:-.35s}#caravan img:nth-child(3){animation-delay:-.7s}#caravan img:nth-child(4){animation-duration:.8s;animation-delay:-.2s;height:92%}
+@keyframes gait{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-1.4%) rotate(-.6deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(-1.4%) rotate(.6deg)}}
+@media (max-width:900px){.ottl{max-width:none}#caravan{height:9vh;bottom:14vh}}
 
 /* Otrar digital restoration */
 .otgrid{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:start;margin-top:6px}
@@ -254,7 +311,7 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
   .qrow,.game,.lessons,.case{grid-template-columns:1fr}
   .card{flex-basis:180px}.card .ph{height:230px}
   .strip{padding:10px calc(50% - 90px) 18px}
-  #vscroll{inset:58px 0 0}
+  #vscroll{inset:58px 0 66px}
   .varr{top:auto;bottom:14px;transform:none}
   .vbar .ttl{font-size:15px}
   .vbar .hide-m{display:none}
@@ -299,6 +356,16 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
   </header>
   <div class="wrap">
     <div class="pin"><div class="panel" id="mission"><div class="kicker" data-t="misK"></div><p class="mission" data-t="mis"></p></div></div>
+    <div class="pin"><div class="panel wide" id="goal">
+      <div class="kicker" data-t="goalK"></div>
+      <p class="goaltxt" data-t="goal"></p>
+      <div class="g3d" id="g3d" aria-hidden="true"><div class="g3s" id="g3s">
+        <div class="gcore"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><circle cx="12" cy="12" r="2.5"/></svg><b data-t="goalCore"></b></div>
+        <div class="gring"></div><div class="gring r2"></div>
+        <i class="gbeam"></i><i class="gbeam"></i><i class="gbeam"></i>
+        <div class="gnode"></div><div class="gnode"></div><div class="gnode"></div>
+      </div></div>
+    </div></div>
   </div>
 </section>
 
@@ -345,30 +412,34 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
         <div class="bar"><div class="pct">89%</div><div class="fill" style="height:89%"></div><div class="yr">2025–2026</div></div>
       </div>
     </div></div>
-    <div class="pin"><div class="panel wide" id="otrar">
+  </div>
+</section>
+
+<!-- ===== OTRAR 1219 · digital reconstruction ===== -->
+<div class="portal" data-stage="trans" data-a="2" data-b="5"><div class="era"><div class="yr">1219</div><div class="nm" data-t="o1n"></div><div class="t2" data-t="o1t"></div></div></div>
+<section id="otrarS" data-stage="hold" data-a="5" data-z0="0" data-z1=".85" style="height:120vh"></section>
+<div class="portal" data-stage="trans" data-a="5" data-b="6" style="height:130vh"></div>
+<section id="otrarM" data-stage="hold" data-a="6" data-z0="0" data-z1=".18" style="height:120vh"></section>
+<div class="portal" data-stage="trans" data-a="6" data-b="7" style="height:140vh"><div class="era"><div class="nm" data-t="o2n"></div><div class="t2" data-t="o2t"></div></div></div>
+<section class="scene" id="otrarG" data-stage="hold" data-a="7" data-z0="0" data-z1=".1" style="padding-top:70vh">
+  <div class="wrap">
+    <div class="pin"><div class="ottl">
       <div class="kicker" data-t="otK"></div>
-      <h2 data-t="otH"></h2>
-      <div class="otgrid">
-        <div>
-          <p class="lead" data-t="otP"></p>
-          <div class="chain" id="otSteps"></div>
-          <div class="evid" id="otEv"></div>
-          <p class="otnote" data-t="otNote"></p>
-          <div class="btns"><button class="btn" id="otOpen" data-t="otBtn"></button></div>
-        </div>
-        <div class="cmp" id="cmp" style="--x:50%">
-          <img src="otrar/ref.jpg" alt="" loading="lazy">
-          <div class="cmpA"><video data-src="otrar/8pN1M2s0-F7XkzZDEOuQ1w.mp4" muted playsinline loop preload="none"></video></div>
-          <span class="lab l" data-t="cmpA"></span><span class="lab r" data-t="cmpB"></span>
-          <input type="range" min="0" max="100" value="50" aria-label="compare" id="cmpR">
-          <i class="hdl"></i>
-        </div>
-      </div>
+      <h2 class="otH" data-t="otH"></h2>
+      <p class="otcap" data-t="otCap"></p>
+    </div></div>
+    <div class="pin"><div class="panel" id="otrar">
+      <div class="kicker" data-t="otK2"></div>
+      <h2 data-t="otH2"></h2>
+      <p class="lead" data-t="otP"></p>
+      <div class="btns"><button class="btn" id="otRoute" data-t="otRouteB"></button><button class="btn ghost" id="otOpen" data-t="otBtn"></button></div>
+      <details class="srcs"><summary data-t="otSrcT"></summary><div id="otEv"></div></details>
+      <p class="otnext" data-t="otNext"></p>
     </div></div>
   </div>
 </section>
 
-<div class="portal" data-stage="trans" data-a="2" data-b="3"><div class="era"><div class="yr">1465</div><div class="nm" data-t="e3n"></div><div class="t2" data-t="e3t"></div></div></div>
+<div class="portal" data-stage="trans" data-a="7" data-b="3"><div class="era"><div class="yr">1465</div><div class="nm" data-t="e3n"></div><div class="t2" data-t="e3t"></div></div></div>
 
 <!-- ===== ERA III · Khanate ===== -->
 <section class="scene" id="era3" data-stage="hold" data-a="3" data-z0="0" data-z1=".3">
@@ -427,12 +498,10 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 
 <!-- archive viewer -->
 <div id="lb" role="dialog" aria-modal="true" aria-label="Document">
-  <div class="beam"></div><div class="bgdim"></div>
+  <div class="abg"></div><div class="beam"></div><div class="bgdim"></div>
+  <div class="vzoom"><button class="vbtn" id="zOut" aria-label="zoom out">−</button><button class="vbtn" id="zFit" aria-label="fit">100%</button><button class="vbtn" id="zIn" aria-label="zoom in">+</button></div>
   <div class="vbar">
     <div class="ttl" id="vttl"></div>
-    <button class="vbtn" id="zOut" aria-label="zoom out">−</button>
-    <button class="vbtn hide-m" id="zFit" data-t="fit"></button>
-    <button class="vbtn" id="zIn" aria-label="zoom in">+</button>
     <a class="vbtn hide-m" id="vOrig" target="_blank" rel="noopener" data-t="orig"></a>
     <button class="vbtn" id="vClose" aria-label="close">✕</button>
   </div>
@@ -440,12 +509,10 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
   <button class="varr prev" id="vPrev" aria-label="previous">‹</button><button class="varr next" id="vNext" aria-label="next">›</button>
 </div>
 
-<div id="ov" role="dialog" aria-modal="true" aria-label="Otrar 3D">
-  <div class="vbar"><div class="ttl" id="ovT"></div>
-    <button class="vbtn" id="ovOrbit" data-t="otOrbit"></button><button class="vbtn" id="ovWalk" data-t="otWalk"></button><button class="vbtn" id="ovVR" style="display:none" data-t="otVR"></button><button class="vbtn" id="ovClose" aria-label="close">✕</button></div>
-  <div class="hint" id="ovHint"></div>
-  <div class="mv"><button class="vbtn" id="mvF" aria-label="forward">▲</button><button class="vbtn" id="mvB" aria-label="back">▼</button></div>
-</div>
+<div id="mcap" class="mcap" data-t="otMcap" style="opacity:0"></div>
+<div id="caravan" aria-hidden="true"><img src="img/cv1.png" alt=""><img src="img/cv2.png" alt=""><img src="img/cv3.png" alt=""><img src="img/cv4.png" alt=""></div>
+<video id="vid2" muted playsinline loop preload="none" data-src="otrar/otrar-vr-concept.mp4" style="position:fixed;width:1px;height:1px;opacity:0;pointer-events:none" aria-hidden="true"></video>
+<div id="rv" role="dialog" aria-modal="true"><video controls playsinline preload="none"></video><button class="vbtn" id="rvClose" aria-label="close">✕</button></div>
 <div id="tour" role="region" aria-label="5 min"><div class="dots" id="tdots"></div><div class="ts" id="tstep"></div>
   <button class="vbtn" id="tPrev" aria-label="prev">‹</button><button class="vbtn" id="tNext" aria-label="next">›</button><button class="vbtn" id="tExit" aria-label="exit">✕</button></div>
 
@@ -458,9 +525,11 @@ motto:"<span>«Тарих — өткеннің өнегесі,</span><span>бү�
 invite:"Сәлеметсіз бе! Менімен бірге ғасырлар арқылы саяхатқа шығыңыз — әр дәуірде менің жұмысымның бір қыры ашылады.",
 start:"Саяхатты бастау ↓",tour:"Портфолио 5 минутта",tourShort:"5 минут",scroll:"Айналдырыңыз",
 misK:"Менің миссиям",mis:"«Менің миссиям — өткенді зерттеу арқылы <em>бүгінді түсінетін</em>, тарихи дәлелге сүйеніп <em>ой қорыта алатын</em>, ұлттық мұрасын <em>құрметтеп</em>, болашаққа <em>жауапкершілікпен</em> қарайтын ұрпақ тәрбиелеу»",
+goalK:"Мақсатым",goal:"«<em>Жасанды интеллектіні ізденіс құралына</em> айналдырып, әр оқушыны тарихи деректі <em>сыни бағалауға</em>, өз тұжырымын <em>дәлелдеуге</em> және ұлттық құндылықтарды <em>саналы құрметтеуге</em> баулу»",
+goalCore:"ЖИ — ізденіс құралы",goalNodes:[["lens","Сыни баға","Тарихи дерек"],["scale","Дәлелдеу","Өз тұжырымы"],["heart","Құрмет","Ұлттық құндылықтар"]],
 y1:"б.з.б. VII–III ғғ.",e1n:"I дәуір",e1t:"Сақтар даласы",y2:"XII ғ.",e2n:"II дәуір · Ұлы Жібек жолы",e2t:"Қожа Ахмет Ясауи · Түркістан",e2note:"Суреттегі кесене 1389–1405 жылдары салынған",
 e3n:"III дәуір",e3t:"Қазақ хандығы",e4n:"IV дәуір",e4t:"Тәуелсіз Қазақстан",
-er:["Кіріспе","Сақтар","Жібек жолы","Хандық","Тәуелсіздік"],
+er:["Кіріспе","Сақтар","Жібек жолы","Отырар","Хандық","Тәуелсіздік"],
 aboutK:"Мен туралы",aboutH:"Педагог-<em>зерттеуші</em>",
 chips:["№81 ЖОББМ","Педагог-зерттеуші","Қазақстан және дүниежүзі тарихы","«Үздік пән мұғалімі – 2026»"],
 s1:"білім сапасы",s2:"марапат",s3:"оқушы жетістігі",s4:"сабақ · 99–100/102",
@@ -481,14 +550,15 @@ gK:"Қосымша материал · авторлық ойын",gH:"«Дала
 gSkill:"Дамытатын дағды: мәтінді оқып түсіну және хронологиялық ойлау — жауапты мәтіндегі дәлелге сүйеніп таңдау.",gBtn:"Толық экранда ойнау ↗",gTry:"▶ Ойнап көру",
 lK:"Оқыту сапасы",lH:"10 сабақ · <em>99–100 / 102</em>",lBtn:"Барлық құжаттар ↗",lBtn2:"Жетістіктер папкасы ↗",
 fP:"Салиманова Жанылсын Кадиржановна · №81 жалпы білім беретін орта мектеп · 2026",
-otK:"Зерттеу жобасы · цифрлық реставрация",otH:"Отырар 1219 — <em>қайта тірілетін қала</em>",
-otP:"Тарихи және археологиялық деректер негізінде Отырардың 3D моделін жасап жатырмын. Мақсат — оқушылар VR көзілдірікпен ортағасырлық қала көшелерімен серуендейтін виртуалды экскурсия.",
-otSteps:["Дереккөздер","Сенімділік A/B/C","3D модель","VR серуен"],
-otEv:[["Шахристан","A / C"],["Цитадель","A / C"],["Үш қақпа","B"],["Базар","B"],["Рабад","A / C"],["Суару жүйесі","A / C"]],
-otLg:"A — бар екені расталған · B — ықтимал · C — модельдегі шартты геометрия",
-otNote:"Шартты визуализация: нысандардың нақты орны археологиялық жоспарлар бойынша нақтыланады.",
-otBtn:"3D модельді ашу",cmpA:"Қазіргі модель",cmpB:"Мақсат · референс",otOrbit:"Шолу",otWalk:"Серуен",otVR:"VR",otTitle:"Отырар 1219 · шартты 3D модель",
-otHintO:"Тышқанмен айналдырыңыз, дөңгелекпен жақындатыңыз",otHintW:"W/A/S/D немесе ▲▼ — жүру, тышқанмен/саусақпен — қарау",
+o1n:"Ұлы Жібек жолының қаласы",o1t:"Отырар",
+otK:"Ғылыми жоба",otH:"Отырар 1219 — <em>цифрлық реконструкция</em>",otCap:"Болашақ VR-серуеннің көркем референсі",
+otK2:"Жоба туралы қысқаша",otH2:"Қала <em>қандай болды?</em>",
+otP:"Жоба ортағасырлық Отырардың шамамен 1219 жылы қандай болғанын зерттейді. Тарихи және археологиялық материалдар негізінде қаланың алдын ала 3D моделі жасалуда: бекіністі орталық, тұрғын кварталдар және суару жүйесі. Жекелеген қақпалардың, көшелер мен ғимараттардың нақты орны әлі нақтылануда.",
+otRouteB:"▶ Маршрутты көру",otBtn:"3D модель кадрлары",o2n:"Модельден",o2t:"референске",otM:["Оңтүстік қақпа · 3D модель (Blender)","Қақпа және тұрғын үйлер · саз өту","Қақпа мен қала · жақын план","Тұрғын үй ауласы · 3D модель","Қақпа мұнаралары · көркем бағыт","Көркем референс · болашақ VR-серуен"],otMcap:"3D модель · Blender · алдын ала",otSrcT:"Дереккөздер мен болжамдар",
+otEv:[["Бекіністі орталық (шахристан)","Бар екені белгілі; ағымдағы модельдегі нақты контуры — шартты.",["A · бар екені","C · контур"]],["Суару жүйесі","Оазис жүйесі деңгейінде расталған; жекелеген арықтардың трассасы — алдын ала.",["A · жүйе","C · трассалар"]]],
+otNext:"Келесі кезең — VR-маршрут: қақпадан тұрғын кварталдарға дейін серуендеп, қай элемент дереккөзге сүйенетінін, қайсысы болжаммен қалпына келтірілгенін білу.",
+otOrbit:"Шолу",otWalk:"Серуен",otVR:"VR",otTitle:"Отырар 1219 · алдын ала 3D модель",
+otHintO:"Тышқанмен айналдырыңыз, дөңгелекпен жақындатыңыз",otHintW:"W/A/S/D немесе ▲▼ — жүру, тышқанмен/саусақпен — қарау",otLoading:"3D модель жүктелуде…",
 all:"Барлығы",dip:"Дипломдар",thx:"Алғыс хаттар",cert:"Сертификаттар",cls:"сынып",fit:"Сыю",orig:"Түпнұсқа ↗",
 L:{int:"Халықаралық",rep:"Республикалық",reg:"Облыстық",dis:"Аудандық"},
 tourSteps:[["Педагог","1 мин"],["Бір сабақ","1,5 мин"],["Расталған нәтиже","1 мин"],["Жетістіктер","1,5 мин"]],tourDone:"Маршрут аяқталды"},
@@ -497,9 +567,11 @@ motto:"<span>«История — урок прошлого,</span><span>ори�
 invite:"Здравствуйте! Отправьтесь со мной в путешествие сквозь века — каждая эпоха откроет одну грань моей работы.",
 start:"Начать путешествие ↓",tour:"Портфолио за 5 минут",tourShort:"5 минут",scroll:"Листайте",
 misK:"Моя миссия",mis:"«Моя миссия — воспитать поколение, которое через изучение прошлого <em>понимает настоящее</em>, опираясь на исторические факты, <em>умеет делать выводы</em>, <em>уважает</em> национальное наследие и <em>ответственно</em> смотрит в будущее»",
+goalK:"Моя цель",goal:"«Превратить <em>искусственный интеллект в инструмент поиска</em> и научить каждого ученика <em>критически оценивать</em> исторический источник, <em>доказывать</em> свой вывод и <em>осознанно уважать</em> национальные ценности»",
+goalCore:"ИИ — инструмент поиска",goalNodes:[["lens","Критическая оценка","Исторический источник"],["scale","Доказательство","Собственный вывод"],["heart","Уважение","Национальные ценности"]],
 y1:"VII–III вв. до н.э.",e1n:"Эпоха I",e1t:"Степь саков",y2:"XII в.",e2n:"Эпоха II · Великий Шёлковый путь",e2t:"Ходжа Ахмед Ясави · Туркестан",e2note:"Изображённый мавзолей построен в 1389–1405 гг.",
 e3n:"Эпоха III",e3t:"Казахское ханство",e4n:"Эпоха IV",e4t:"Независимый Казахстан",
-er:["Вступление","Саки","Шёлковый путь","Ханство","Независимость"],
+er:["Вступление","Саки","Шёлковый путь","Отрар","Ханство","Независимость"],
 aboutK:"Обо мне",aboutH:"Педагог-<em>исследователь</em>",
 chips:["СОШ №81","Педагог-исследователь","История Казахстана и всемирная","«Лучший учитель – 2026»"],
 s1:"качество знаний",s2:"наград",s3:"достижений учеников",s4:"уроков · 99–100/102",
@@ -520,21 +592,22 @@ gK:"Дополнительный материал · авторская игра
 gSkill:"Развиваемый навык: смысловое чтение и хронологическое мышление — выбор ответа с опорой на доказательство из текста.",gBtn:"Играть на весь экран ↗",gTry:"▶ Попробовать",
 lK:"Качество преподавания",lH:"10 уроков · <em>99–100 / 102</em>",lBtn:"Все документы ↗",lBtn2:"Папка достижений ↗",
 fP:"Салиманова Жанылсын Кадиржановна · КГУ «СОШ №81» · 2026",
-otK:"Исследовательский проект · цифровая реставрация",otH:"Отрар 1219 — <em>город, который оживает</em>",
-otP:"На основе исторических и археологических данных создаю 3D-модель Отрара. Цель — виртуальная экскурсия, в которой ученики в VR-очках гуляют по улицам средневекового города.",
-otSteps:["Источники","Достоверность A/B/C","3D-модель","VR-прогулка"],
-otEv:[["Шахристан","A / C"],["Цитадель","A / C"],["Три ворот","B"],["Базар","B"],["Рабад","A / C"],["Ирригация","A / C"]],
-otLg:"A — существование подтверждено · B — вероятно · C — условная геометрия модели",
-otNote:"Условная визуализация: точное положение объектов уточняется по археологическим планам.",
-otBtn:"Открыть 3D-модель",cmpA:"Текущая модель",cmpB:"Цель · референс",otOrbit:"Обзор",otWalk:"Прогулка",otVR:"VR",otTitle:"Отрар 1219 · условная 3D-модель",
-otHintO:"Вращайте мышью, приближайте колесом",otHintW:"W/A/S/D или ▲▼ — идти, мышью/пальцем — смотреть",
+o1n:"Город Великого Шёлкового пути",o1t:"Отрар",
+otK:"Научный проект",otH:"Отрар 1219 — <em>цифровая реконструкция</em>",otCap:"Художественный референс будущей VR-прогулки",
+otK2:"Кратко о проекте",otH2:"Каким был <em>город?</em>",
+otP:"Проект исследует, как мог выглядеть средневековый Отрар около 1219 года. На основе исторических и археологических материалов создаётся предварительная 3D-модель города: укреплённый центр, жилые кварталы и ирригация. Точное расположение отдельных ворот, улиц и зданий ещё уточняется.",
+otRouteB:"▶ Посмотреть маршрут",otBtn:"Кадры 3D-модели",o2n:"От модели",o2t:"к референсу",otM:["Южные ворота · 3D-модель (Blender)","Ворота и жилые дома · глиняный проход","Ворота и город · крупный план","Двор жилого дома · 3D-модель","Башни ворот · арт-дирекшн","Художественный референс · будущая VR-прогулка"],otMcap:"3D-модель · Blender · предварительно",otSrcT:"Источники и гипотезы",
+otEv:[["Укреплённый центр (шахристан)","Существование известно; точный контур в текущей модели условный.",["A · существование","C · контур"]],["Ирригация","Подтверждается на уровне системы оазиса; трассы отдельных каналов предварительные.",["A · система","C · трассы"]]],
+otNext:"Следующий этап — VR-маршрут: пройти от городских ворот к жилым кварталам и узнать, какие элементы опираются на источники, а какие восстановлены предположительно.",
+otOrbit:"Обзор",otWalk:"Прогулка",otVR:"VR",otTitle:"Отрар 1219 · предварительная 3D-модель",
+otHintO:"Вращайте мышью, приближайте колесом",otHintW:"W/A/S/D или ▲▼ — идти, мышью/пальцем — смотреть",otLoading:"Загрузка 3D-модели…",
 all:"Все",dip:"Дипломы",thx:"Благодарности",cert:"Сертификаты",cls:"класс",fit:"Вписать",orig:"Оригинал ↗",
 L:{int:"Международный",rep:"Республиканский",reg:"Областной",dis:"Районный"},
 tourSteps:[["Педагог","1 мин"],["Один урок","1,5 мин"],["Подтверждённый результат","1 мин"],["Достижения","1,5 мин"]],tourDone:"Маршрут завершён"}
 };
 const ICON={map:'<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
 chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8.5 10.5l2 2 4-4"/>',chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
-lens:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/>',scale:'<path d="M12 3v18M5 21h14M6 7h12"/><path d="M6 7l-3 7h6zM18 7l-3 7h6z"/>'};
+lens:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/>',heart:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>',scale:'<path d="M12 3v18M5 21h14M6 7h12"/><path d="M6 7l-3 7h6zM18 7l-3 7h6z"/>'};
 const TILES=[["map",["Функционалдық сауаттылық","Карта мен дереккөз — өмірлік тапсырма"],["Функциональная грамотность","Карты и источники — задачи из жизни"]],
 ["target",["Саралап оқыту","Әр оқушыға — өз деңгейі"],["Дифференциация","Каждому ученику — свой уровень"]],
 ["chat",["Кері байланыс","Критерий, дескриптор, өзара бағалау"],["Обратная связь","Критерии, дескрипторы, взаимооценка"]],
@@ -547,6 +620,7 @@ const ST=[["Базарбай Самғат","9","rep","2","2025","«Менің ш
 const PL={kz:{1:"I дәреже",2:"II дәреже",3:"III дәреже",p:"Қатысушы"},ru:{1:"I степень",2:"II степень",3:"III степень",p:"Участник"}};
 const LS=[["7","14.10.2024","99","1DPOHchFzK9iVXMHyX4vAvD2WA-VONVrq",["Абылай ханның ішкі және сыртқы саясаты","Политика Абылай хана"]],["10","25.11.2024","100","1GLpYX4Tpkcfu_uCV35fp00lEYdlED7U0",["Қазақтардың ру-тайпалық құрылымы","Родоплеменная структура казахов"]],["6","22.04.2025","100","1zi-PcItErndeXlDws-GN7lt1zIWVb1R8",["Жошы хан тұсындағы Қазақстан","Казахстан в эпоху Джучи"]],["6","12.05.2025","99","1DJ_6UCK5QuCTpp3bcdUYsU88jVyhNqw1",["Моңғол шапқыншылығының салдары","Последствия монгольского нашествия"]]];
 
+const RAIL=[[0],[1],[2],[5,6,7],[3],[4]],RAILEL=["#intro","#era1","#era2","#otrarS","#era3","#era4"],RN=["·","I","II","✦","III","IV"];
 let lang="kz";try{const s=localStorage.getItem("lang");if(s==="ru"||s==="kz")lang=s}catch(e){}
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],pad=i=>String(i+1).padStart(2,"0"),clamp01=v=>Math.max(0,Math.min(1,v));
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -554,14 +628,14 @@ function render(){
   const t=T[lang],K=lang==="kz"?0:1;document.documentElement.lang=K?"ru":"kk";
   $$("[data-t]").forEach(e=>{const v=t[e.dataset.t];if(typeof v==="string")e.innerHTML=v});
   $$(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===lang));
-  $("#rail").innerHTML=t.er.map((n,i)=>`<button data-go="${i}"><b>${["·","I","II","III","IV"][i]}</b>${n}</button>`).join("");
-  $("#pillList").innerHTML=t.er.map((n,i)=>`<button data-go="${i}">${["·","I","II","III","IV"][i]} · ${n}</button>`).join("");
+  $("#rail").innerHTML=t.er.map((n,i)=>`<button data-go="${i}"><b>${RN[i]}</b>${n}</button>`).join("");
+  $("#pillList").innerHTML=t.er.map((n,i)=>`<button data-go="${i}">${RN[i]} · ${n}</button>`).join("");
   $("#chips").innerHTML=t.chips.map(c=>`<span class="chip">${c}</span>`).join("");
   $("#case").innerHTML=t.case.map((c,i)=>`<div class="${i===4?"full":""}"><b>${c[0]}</b><p>${c[1]}</p></div>`).join("");
   $("#tiles").innerHTML=TILES.map(x=>`<div class="tile"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[x[0]]}</svg><h3>${x[1+K][0]}</h3><p>${x[1+K][1]}</p></div>`).join("");
   $("#chain").innerHTML=t.chain.map((c,i)=>`${i?"<i>→</i>":""}<span>${c}</span>`).join("");
-  $("#otSteps").innerHTML=t.otSteps.map((c,i)=>`${i?"<i>→</i>":""}<span>${c}</span>`).join("");
-  $("#otEv").innerHTML=t.otEv.map(r=>`<span>${r[0]}</span><span>${r[1]}</span>`).join("")+`<span class="lg">${t.otLg}</span>`;
+  $$("#g3s .gnode").forEach((n,i)=>{const d=t.goalNodes[i];n.innerHTML=`<svg viewBox="0 0 24 24">${ICON[d[0]]}</svg><b>${d[1]}</b><span>${d[2]}</span>`});
+  $("#otEv").innerHTML=t.otEv.map(r=>`<div class="ev"><b>${r[0]}</b>${r[2].map(x=>`<span>${x}</span>`).join("")}<div>${r[1]}</div></div>`).join("");
   $("#years").innerHTML=YEARS.map(y=>`<div class="yrc"><b>${y[0]}</b>${y[1][K]}</div>`).join("");
   $("#fA").innerHTML=[["all",t.all],["dip",t.dip],["thx",t.thx],["cert",t.cert]].map((x,i)=>`<button data-f="${x[0]}" class="${i?"":"on"}">${x[1]}</button>`).join("");
   $("#gA").innerHTML=AW.map((a,i)=>`<div class="card" tabindex="0" role="button" data-type="${a[0]}" data-i="${i}" data-src="img/a${pad(i)}.jpg" data-hi="hi/a${pad(i)}.jpg" data-year="${a[2]}" data-title="${(K?a[4]:a[3]).replace(/"/g,"&quot;")}"><div class="ph"><img loading="lazy" decoding="async" src="img/a${pad(i)}.jpg" alt=""></div><div class="cap"><b><span>${t.L[a[1]]}</span><span>${a[2]}</span></b>${a[3+K]}</div></div>`).join("");
@@ -588,7 +662,7 @@ function layoutPins(){const H=innerHeight,y=scrollY;pins=$$(".pin").map(pin=>{co
   const top=h<H-130?Math.max(70,(H-h)/2):H-h-24;pin.style.setProperty("--top",top+"px");pin.style.height=(h+H*(h<H-130?.95:.75))+"px";
   return{pin,p,h,top}});pins.forEach(o=>{o.abs=o.pin.getBoundingClientRect().top+y;o.ph=o.pin.offsetHeight})}
 addEventListener("resize",()=>{layoutPins();measure()});addEventListener("load",()=>{layoutPins();measure()});document.fonts&&document.fonts.ready.then(()=>{layoutPins();measure()});
-new ResizeObserver(()=>measure()).observe($("main"));
+let roT=0;new ResizeObserver(()=>{cancelAnimationFrame(roT);roT=requestAnimationFrame(()=>{layoutPins();measure()})}).observe($("main"));
 const S={a:0,b:0,p:0,za:0,zb:0,era:0,t:0};
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 function onScroll(){
@@ -603,10 +677,10 @@ function onScroll(){
 }
 addEventListener("scroll",onScroll,{passive:true});
 let lastEra=-1;
-function updateNav(){if(S.era===lastEra&&$("#rail").children.length&&$("#rail .on"))return;lastEra=S.era;
-  $$("#rail button,#pillList button").forEach(b=>b.classList.toggle("on",+b.dataset.go===S.era));
-  $("#pillBtn").textContent=["·","I","II","III","IV"][S.era]+" · "+T[lang].er[S.era]+" ▾"}
-function goEra(i){const el=i?document.getElementById("era"+i):$("#intro");scrollTo({top:i?el.offsetTop+innerHeight*.05:0,behavior:reduce?"auto":"smooth"});$("#railpill").classList.remove("open")}
+function updateNav(){if(S.era===lastEra&&$("#rail").children.length&&$("#rail .on"))return;lastEra=S.era;const ri=RAIL.findIndex(r=>r.includes(S.era));
+  $$("#rail button,#pillList button").forEach(b=>b.classList.toggle("on",+b.dataset.go===ri));
+  $("#pillBtn").textContent=RN[ri]+" · "+T[lang].er[ri]+" ▾"}
+function goEra(i){const el=$(RAILEL[i]);scrollTo({top:i?el.offsetTop+innerHeight*.05:0,behavior:reduce?"auto":"smooth"});$("#railpill").classList.remove("open")}
 document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){e.preventDefault();goEra(+g.dataset.go)}});
 $("#pillBtn").onclick=()=>{const r=$("#railpill");r.classList.toggle("open");$("#pillBtn").setAttribute("aria-expanded",r.classList.contains("open"))};
 $("#startBtn").onclick=()=>scrollTo({top:$("#p1").offsetTop-innerHeight*.3,behavior:reduce?"auto":"smooth"});
@@ -614,7 +688,18 @@ $("#startBtn").onclick=()=>scrollTo({top:$("#p1").offsetTop-innerHeight*.3,behav
 /* pinned panel choreography — reads cached geometry only (no layout thrash) */
 const countUp=el=>{if(el.dataset.done)return;el.dataset.done=1;el.querySelectorAll("[data-count]").forEach(c=>{const n=+c.dataset.count,suf=c.dataset.suf||"";if(reduce)return;const t0=performance.now();(function st(t){const p=Math.min(1,(t-t0)/1100);c.textContent=Math.round(n*(.35+.65*(1-Math.pow(1-p,3))))+suf;if(p<1)requestAnimationFrame(st)})(t0)});
   el.querySelectorAll(".fill").forEach((f,i)=>{f.style.setProperty("--s",0);requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.setProperty("--s",1)))})};
-function panelsFrame(){const H=innerHeight,y=scrollY;
+/* goal orbit: true 3D placement, cards stay facing the viewer */
+const g3={el:$("#g3s"),nodes:$$("#g3s .gnode"),beams:$$("#g3s .gbeam"),ry:0,tx:0,ty:0,hover:false};
+$("#g3d").addEventListener("pointermove",e=>{const r=e.currentTarget.getBoundingClientRect();g3.tx=((e.clientY-r.top)/r.height-.5)*-10;g3.ty=((e.clientX-r.left)/r.width-.5)*14;g3.hover=true});
+$("#g3d").addEventListener("pointerleave",()=>{g3.tx=g3.ty=0;g3.hover=false});
+function goalFrame(dt){const o=pins.find(p=>p.p.id==="goal");if(!o||!o.vis)return;const R=innerWidth>900?250:150;
+  if(!reduce&&!g3.hover)g3.ry+=dt*14;const ry=g3.ry+scrollY*.05;
+  g3.cx=(g3.cx||0)+(g3.tx-(g3.cx||0))*.08;g3.cy=(g3.cy||0)+(g3.ty-(g3.cy||0))*.08;
+  g3.el.style.transform=`translateY(10px) rotateX(${(-14+g3.cx).toFixed(2)}deg) rotateY(${g3.cy.toFixed(2)}deg)`;
+  g3.nodes.forEach((n,i)=>{const a=ry+i*120,z=Math.cos(a*Math.PI/180);n.style.transform=`rotateY(${a}deg) translateZ(${R}px) rotateY(${-a}deg) rotateX(${14-g3.cx}deg) scale(${(.86+.14*(z+1)/2).toFixed(3)})`;n.style.opacity=(.55+.45*(z+1)/2).toFixed(2);n.style.zIndex=Math.round(z*10)+10});
+  g3.beams.forEach((b,i)=>{b.style.transform=`rotateY(${ry+i*120-90}deg)`;b.style.width=R+"px"})}
+let lastF=performance.now();
+function panelsFrame(){const H=innerHeight,y=scrollY;const now=performance.now();goalFrame(Math.min(.05,(now-lastF)/1000));lastF=now;
   for(const o of pins){const rt=o.abs-y,rb=rt+o.ph;
     if(rb<-60||rt>H+60){if(o.vis!==0){o.p.style.opacity=0;o.vis=0}continue}
     const en=clamp01((H-rt)/(H*.45)),ex=clamp01((rb-H*.1)/(H*.35)),v=Math.min(en,ex);
@@ -641,8 +726,8 @@ $("#tPrev").onclick=()=>tourGo(tI-1);$("#tNext").onclick=()=>{if(tI<3)tourGo(tI+
 
 /* ================= ARCHIVE VIEWER ================= */
 const lb=$("#lb"),vimg=$("#vimg"),vdoc=$("#vdoc"),vsc=$("#vscroll");let vList=[],vI=0,vZoom=1,vFrom=null,vScrollY=0;
-function fitW(){const n=vimg.naturalWidth||1000,nh=vimg.naturalHeight||1400,aw=vsc.clientWidth-(innerWidth>900?20:0),ah=vsc.clientHeight-10;return Math.min(aw,ah*n/nh)}
-function applyZoom(){const w=fitW()*vZoom;vimg.style.width=w+"px";vsc.classList.toggle("fit",vZoom<=1.001)}
+function fitW(){const n=vimg.naturalWidth||1000,nh=vimg.naturalHeight||1400,aw=vsc.clientWidth-44,ah=vsc.clientHeight-44;return Math.min(aw,ah*n/nh)}
+function applyZoom(){const w=fitW()*vZoom;vimg.style.width=w+"px";$("#zFit").textContent=Math.round(vZoom*100)+"%";vsc.classList.toggle("fit",vZoom<=1.001)}
 function vSet(i,animateFrom){vI=(i+vList.length)%vList.length;const it=vList[vI];
   $("#vttl").innerHTML=`${it.title}<small>${it.year||""} · ${vI+1} / ${vList.length}</small>`;$("#vOrig").href=it.hi;
   vZoom=1;vimg.onload=null;vimg.src=it.src;
@@ -679,80 +764,13 @@ vsc.addEventListener("pointermove",e=>{if(!pts.has(e.pointerId))return;pts.set(e
 ["pointerup","pointercancel","pointerleave"].forEach(ev=>vsc.addEventListener(ev,e=>{pts.delete(e.pointerId);if(pts.size<2)pd0=0}));
 vsc.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
 
-/* ================= OTRAR 1219 — port of the Blender generator (main.py, seed 1219) ================= */
-(function(){
-  const cmp=$("#cmp"),r=$("#cmpR"),cv=cmp.querySelector("video");
-  r.oninput=()=>cmp.style.setProperty("--x",r.value+"%");
-  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!cv.src)cv.src=cv.dataset.src;cv.play().catch(()=>{})}else cv.pause()})).observe(cmp);
-  const ov=$("#ov");let R3,sc,cam,built=false,mode="orbit",raf=0,yaw=.6,pitch=.55,dist=900,keys={},walkYaw=0,walkPitch=0,pos;
-  function seeded(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-  function build(){
-    const rnd=seeded(1219),U=(a,b)=>a+rnd()*(b-a);
-    R3=new THREE.WebGLRenderer({antialias:true});R3.setPixelRatio(Math.min(devicePixelRatio,1.5));R3.xr.enabled=true;ov.prepend(R3.domElement);
-    sc=new THREE.Scene();sc.background=new THREE.Color(0xd9c3a0);sc.fog=new THREE.Fog(0xd9c3a0,700,2200);
-    cam=new THREE.PerspectiveCamera(50,1,1,6000);
-    sc.add(new THREE.HemisphereLight(0xfff1d6,0x6b5236,.9));const sun=new THREE.DirectionalLight(0xffd9a0,1.1);sun.position.set(-500,700,300);sc.add(sun);
-    const M=c=>new THREE.MeshLambertMaterial({color:c});
-    const clay=[0x825c36,0x91663d,0xab8252,0x734f33].map(M),wall=M(0x784f2b),earth=M(0x857a4d),road=M(0x997a52),water=M(0x214d52),green=M(0x3b5926);
-    const P=(x,y)=>[x,-y]; // blender (x,y) -> three (x,z)
-    const box=(m,x,y,z,w,d,h,rot=0)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,z,-y);o.rotation.y=rot;sc.add(o);return o};
-    const core=[[-195,-110],[-155,140],[15,207],[178,135],[207,-75],[75,-190],[-85,-185]];
-    const inside=(x,y,pl)=>{let v=false;for(let i=0,j=pl.length-1;i<pl.length;j=i++){const [xi,yi]=pl[i],[xj,yj]=pl[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)v=!v}return v};
-    const near=(x,y,a,b)=>{const dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy)));return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy)};
-    const seg=(a,b,w,h,z,m)=>{const dx=b[0]-a[0],dy=b[1]-a[1];box(m,(a[0]+b[0])/2,(a[1]+b[1])/2,z+h/2,Math.hypot(dx,dy),w,h,Math.atan2(dy,dx))};
-    const prism=(pts,z0,z1,m)=>{const sh=new THREE.Shape(pts.map(p=>new THREE.Vector2(p[0],p[1])));const g=new THREE.ExtrudeGeometry(sh,{depth:z1-z0,bevelEnabled:false});g.rotateX(-Math.PI/2);const o=new THREE.Mesh(g,m);o.position.y=z0;sc.add(o)};
-    prism(core,0,9,clay[2]);box(earth,0,0,-3,1750,1550,5);
-    const gates={0:1,2:1,5:1};
-    core.forEach((a,i)=>{const b=core[(i+1)%core.length],L=Math.hypot(b[0]-a[0],b[1]-a[1]),vx=(b[0]-a[0])/L,vy=(b[1]-a[1])/L;
-      if(gates[i]){const m=[(a[0]+b[0])/2,(a[1]+b[1])/2],l=[m[0]-vx*6,m[1]-vy*6],rr=[m[0]+vx*6,m[1]+vy*6];seg(a,l,9,8,9,wall);seg(rr,b,9,8,9,wall);[l,rr].forEach(p=>box(wall,p[0],p[1],14,10,10,10));seg(l,rr,13,1,9,road)}
-      else seg(a,b,9,8,9,wall);
-      for(let k=1;k<Math.floor(L/40);k++){const x=a[0]+vx*k*40,y=a[1]+vy*k*40;const tw=new THREE.Mesh(new THREE.CylinderGeometry(6,7,13,10),wall);tw.position.set(x,15.5,-y);sc.add(tw)}});
-    const cit=[[60,62],[123,60],[135,111],[76,137]];prism(cit,9,13,wall);cit.forEach((a,i)=>seg(a,cit[(i+1)%4],5,6,13,wall));
-    for(let j=0;j<7;j++)box(clay[j%4],79+(j%3)*15,78+Math.floor(j/3)*16,15,12,11,4);
-    const roads=[[[-155,15],[65,48]],[[-25,-165],[-10,10]],[[-10,10],[65,48]],[[-10,10],[155,40]],[[-145,0],[-30,-85]],[[-30,-85],[-25,-165]]];
-    roads.forEach(([a,b])=>seg(a,b,7,.12,9.05,road));
-    const houses=[];
-    for(let x=-170;x<=180;x+=16)for(let y=-160;y<=180;y+=15){const xx=x+U(-1.8,1.8),yy=y+U(-1.8,1.8);
-      if(![-7,7].every(dx=>[-7,7].every(dy=>inside(xx+dx,yy+dy,core))))continue;if(roads.some(([a,b])=>near(xx,yy,a,b)<13))continue;
-      if(xx>45&&xx<147&&yy>50&&yy<145)continue;if(xx>-75&&xx<-20&&yy>-20&&yy<35)continue;
-      const w=U(8,12),d=U(8,11),h=U(3,5);houses.push([xx,yy,9+h/2,w,d,h,Math.floor(rnd()*4)])}
-    for(let j=0;j<14;j++)houses.push([-70+(j%7)*8,-18+Math.floor(j/7)*12,10.4,6,6,2.8,j%4]);
-    for(let x=-470;x<490;x+=22)for(let y=-430;y<440;y+=22){if(inside(x,y,core))continue;const rad=(x/460)**2+(y/400)**2;if(rad>1||rad<.28)continue;
-      if(rnd()>(rad<.65?.45:.24))continue;if(Math.abs(y+.38*x+230)<18||Math.abs(x-.22*y-270)<16)continue;const w=U(8,15),d=U(8,14),h=U(2.6,4.5);houses.push([x,y,h/2,w,d,h,Math.floor(rnd()*4)])}
-    const bg=new THREE.BoxGeometry(1,1,1),cols=[0x825c36,0x91663d,0xab8252,0x734f33].map(c=>new THREE.Color(c));
-    const inst=new THREE.InstancedMesh(bg,new THREE.MeshLambertMaterial(),houses.length),m4=new THREE.Matrix4();
-    houses.forEach((h,i)=>{m4.compose(new THREE.Vector3(h[0],h[2],-h[1]),new THREE.Quaternion(),new THREE.Vector3(h[3],h[5],h[4]));inst.setMatrixAt(i,m4);inst.setColorAt(i,cols[h[6]])});sc.add(inst);
-    for(let j=0;j<3;j++)seg([-630,-460-j*48],[570,-460-j*48+75],5,.09,.04,water);
-    for(let j=0;j<65;j++)box(green,U(-650,650),(rnd()<.5?-1:1)*U(450,700),.03,U(15,38),U(10,25),.06);
-    const tg=new THREE.ConeGeometry(4,12,6),tr=new THREE.InstancedMesh(tg,M(0x4f6b2c),220);
-    for(let i=0;i<220;i++){let x,y;do{x=U(-520,520);y=U(-480,480)}while(inside(x,y,core));m4.compose(new THREE.Vector3(x,6,-y),new THREE.Quaternion(),new THREE.Vector3(1,U(.8,1.4),1));tr.setMatrixAt(i,m4)}sc.add(tr);
-    pos=new THREE.Vector3(-170,9+1.7,-(-104));/* near the west gate, on the city mound */
-    built=true;
-    if(navigator.xr&&navigator.xr.isSessionSupported)navigator.xr.isSessionSupported("immersive-vr").then(s=>{if(s)$("#ovVR").style.display=""}).catch(()=>{});
-  }
-  function size(){if(!R3)return;R3.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}
-  function setMode(m){mode=m;ov.classList.toggle("walk",m==="walk");$("#ovHint").textContent=T[lang][m==="walk"?"otHintW":"otHintO"];
-    if(m==="walk"){pos.set(-150,10.7,-16);walkYaw=-Math.PI/2+.15;walkPitch=-.04}}
-  function frame(){if(!ov.classList.contains("on"))return;
-    if(mode==="orbit"){if(!drag)yaw+=.0006;cam.position.set(Math.sin(yaw)*Math.cos(pitch)*dist,Math.sin(pitch)*dist,Math.cos(yaw)*Math.cos(pitch)*dist);cam.lookAt(0,10,0)}
-    else{const sp=(keys.ShiftLeft?3:1.2),f=(keys.KeyW||keys.ArrowUp||mvF?1:0)-(keys.KeyS||keys.ArrowDown||mvB?1:0),s=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0);
-      pos.x+=(-Math.sin(walkYaw)*f+Math.cos(walkYaw)*s)*sp;pos.z+=(-Math.cos(walkYaw)*f-Math.sin(walkYaw)*s)*sp;cam.position.copy(pos);cam.rotation.set(walkPitch,walkYaw,0,"YXZ")}
-    R3.render(sc,cam)}
-  let drag=false,lx=0,ly=0,mvF=false,mvB=false;
-  ov.addEventListener("pointerdown",e=>{if(e.target.closest(".vbar,.mv"))return;drag=true;lx=e.clientX;ly=e.clientY});
-  addEventListener("pointerup",()=>drag=false);
-  addEventListener("pointermove",e=>{if(!drag||!ov.classList.contains("on"))return;const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;
-    if(mode==="orbit"){yaw-=dx*.005;pitch=Math.max(.08,Math.min(1.45,pitch+dy*.004))}else{walkYaw-=dx*.004;walkPitch=Math.max(-1,Math.min(1,walkPitch-dy*.004))}});
-  ov.addEventListener("wheel",e=>{e.preventDefault();if(mode==="orbit")dist=Math.max(150,Math.min(2200,dist*(1+e.deltaY*.001)))},{passive:false});
-  addEventListener("keydown",e=>{if(!ov.classList.contains("on"))return;keys[e.code]=true;if(e.key==="Escape")close()});addEventListener("keyup",e=>keys[e.code]=false);
-  const hold=(id,set)=>{const b=$(id);["pointerdown","pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,e=>{e.stopPropagation();set(ev==="pointerdown")}))};
-  hold("#mvF",v=>mvF=v);hold("#mvB",v=>mvB=v);
-  function open(){ov.classList.add("on");document.documentElement.style.overflow="hidden";if(!built)build();size();$("#ovT").textContent=T[lang].otTitle;setMode(mode);R3.setAnimationLoop(frame)}
-  function close(){ov.classList.remove("on");document.documentElement.style.overflow="";if(R3)R3.setAnimationLoop(null)}
-  $("#otOpen").onclick=()=>{if(window.THREE)open()};$("#ovClose").onclick=close;$("#ovOrbit").onclick=()=>setMode("orbit");$("#ovWalk").onclick=()=>setMode("walk");
-  $("#ovVR").onclick=async()=>{try{const s=await navigator.xr.requestSession("immersive-vr",{optionalFeatures:["local-floor"]});setMode("walk");cam.position.copy(pos);R3.xr.setReferenceSpaceType("local-floor");await R3.xr.setSession(s)}catch(e){}};
-  addEventListener("resize",size);
-})();
+/* Otrar: route clip + model frames (model first, reference last) */
+const rv=$("#rv"),rvv=rv.querySelector("video");
+function rvClose(){rv.classList.remove("on");rvv.pause();document.documentElement.style.overflow=""}
+$("#otRoute").onclick=()=>{if(!rvv.src)rvv.src="otrar/route.mp4";rv.classList.add("on");document.documentElement.style.overflow="hidden";rvv.currentTime=0;rvv.play().catch(()=>{});$("#rvClose").focus({preventScroll:true})};
+$("#rvClose").onclick=rvClose;rv.addEventListener("click",e=>{if(e.target===rv)rvClose()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&rv.classList.contains("on"))rvClose()});
+$("#otOpen").onclick=e=>vOpen(T[lang].otM.map((ti,i)=>{const s=i<5?`otrar/m${i+1}.jpg`:"otrar/gate.jpg";return{src:s,hi:s,title:ti,year:"Отырар 1219"}}),0,e.currentTarget);
 
 /* corner ornaments for parchment */
 (function(){const p=t=>`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><g transform='${t}' fill='none' stroke='#8a5a22' stroke-width='3' stroke-linecap='round'><path d='M4 52 C4 22 22 4 52 4'/><path d='M12 46 C8 26 24 10 42 14 C54 17 52 32 41 32 C33 32 32 23 38 22'/><path d='M46 12 C26 8 10 24 14 42 C17 54 32 52 32 41 C32 33 23 32 22 38'/><circle cx='12' cy='12' r='3.5' fill='#8a5a22'/></g></svg>`)}")`;
@@ -766,28 +784,39 @@ const SCENES=[
  {src:"img/era1.jpg",asp:16/9,fi:[.5,.55],fo:[.46,.2],r:[.22,.80],rs:.6,fx:"pollen",p:[.66,1,.9,0],g:[1,.88,.72,.38],l:[.22,.80,.07,.3]},
  {src:"img/era2.jpg",asp:16/9,fi:[.32,.12],fo:[.97,.44],r:[.97,.44],rs:.4,fx:"sand",p:[.27,0,.12,0],g:[.95,.74,.5,.28],l:[.97,.44,.08,.25],w:[0,.06,.62,.42]},
  {src:"img/era3.jpg",asp:16/9,fi:[.47,.30],fo:[.47,.30],r:[.47,.30],rs:.18,fx:"embers",p:[.76,.6,.1,0],g:[.62,.6,.82,.24],l:[.47,.30,.1,.7],w:[.84,.25,.99,.45]},
- {src:"img/era4.jpg",asp:16/9,fi:[.5,.5],fo:[.5,.5],r:[.50,.87],rs:.35,fx:"lights",p:[.92,0,0,.65],g:[.5,.62,.95,.1],l:[.5,.87,.05,.35],tw:.6}
+ {src:"img/era4.jpg",asp:16/9,fi:[.5,.5],fo:[.5,.5],r:[.50,.87],rs:.35,fx:"lights",p:[.92,0,0,.65],g:[.5,.62,.95,.1],l:[.5,.87,.05,.35],tw:.6},
+ /* 5 · Otrar: aerial city flight (concept video) */
+ {video:"#vid2",asp:16/9,fi:[.5,.5],fo:[.45,.36],r:[.5,.8],rs:0,fx:"sand",p:[.95,0,0,0],g:[.95,.8,.6,.2]},
+ /* 6 · Otrar: gate — 3D model render (Blender) */
+ {src:"otrar/m1.jpg",asp:16/9,fi:[.5,.45],fo:[.5,.42],r:[.5,.8],rs:0,fx:"sand",p:[.9,0,.04,0],g:[1,.88,.7,.15]},
+ /* 7 · Otrar: gate — photoreal reference */
+ {src:"otrar/gate.jpg",asp:1672/941,fi:[.53,.42],fo:[.53,.42],r:[.62,.54],rs:.45,fx:"pollen",p:[.45,0,.05,0],g:[1,.85,.62,.3],l:[.62,.54,.06,.2]}
 ];
+const ORDER=[0,1,2,5,6,7,3,4];
 (function(){
   const mobile=innerWidth<768||matchMedia("(pointer:coarse)").matches;
   const lbar=$("#lbar"),vid=$("#vid");
   let started=false;const done=()=>{if(started)return;started=true;$("#load").classList.add("done");vid.play().catch(()=>{});layoutPins();measure()};
-  if(!window.THREE){done();return}
+  if(!window.THREE){done();(function f(){panelsFrame();requestAnimationFrame(f)})();return}
+  if(mobile||reduce){SCENES[5]=Object.assign({},SCENES[7]);SCENES[6]=Object.assign({},SCENES[7])} /* phone / reduced motion: the same frame, static */
+  const vid2=$("#vid2"),car=$("#caravan");
   const R=new THREE.WebGLRenderer({antialias:false,powerPreference:"high-performance"});
   R.setPixelRatio(mobile?1:Math.min(devicePixelRatio,1.25));R.setSize(innerWidth,innerHeight);$("#gl").appendChild(R.domElement);
   const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1),scene=new THREE.Scene(),L=new THREE.TextureLoader();
   const ready=[];
-  const tex=SCENES.map((s,i)=>{let t;if(s.video){t=new THREE.VideoTexture(vid);const f=()=>{if(!ready[i]){ready[i]=1;lbar.style.width="50%";check()}};if(vid.readyState>=2)f();else{vid.addEventListener("loadeddata",f);vid.addEventListener("error",f)}}
+  const envs=[];let PM=null;const mkEnv=(i,im)=>{const go=()=>{if(!PM)PM=new THREE.PMREMGenerator(R);const c=document.createElement("canvas");c.width=512;c.height=256;c.getContext("2d").drawImage(im,0,0,512,256);const et=new THREE.CanvasTexture(c);et.mapping=THREE.EquirectangularReflectionMapping;envs[i]=PM.fromEquirectangular(et).texture};(window.requestIdleCallback||setTimeout)(go)};
+  const tex=SCENES.map((s,i)=>{let t;if(s.video){const v=$(s.video);t=new THREE.VideoTexture(v);const f=()=>{if(!ready[i]){ready[i]=1;if(i===0){lbar.style.width="50%";check()}}};if(v.readyState>=2)f();else{v.addEventListener("loadeddata",f);v.addEventListener("error",f)}}
     else t=new THREE.Texture();t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;return t});
   function loadTex(i){if(i<1||i>=SCENES.length||tex[i].image||tex[i]._loading)return;tex[i]._loading=1;
-    const im=new Image();im.decoding="async";im.onload=()=>{const go=()=>{tex[i].image=im;tex[i].needsUpdate=true;R.initTexture(tex[i]);ready[i]=1;if(i===1){lbar.style.width="100%";check()}};
+    const im=new Image();im.decoding="async";im.onload=()=>{const go=()=>{tex[i].image=im;tex[i].needsUpdate=true;R.initTexture(tex[i]);ready[i]=1;mkEnv(i,im);if(i===1){lbar.style.width="100%";check()}};
       im.decode?im.decode().then(go,go):go()};im.onerror=()=>{ready[i]=1;check()};im.src=SCENES[i].src}
   function check(){if(ready[0]&&ready[1])setTimeout(done,200)}
   loadTex(1);setTimeout(done,8000);
   /* progressive: prefetch the next eras in idle time */
   const idle=window.requestIdleCallback||(f=>setTimeout(f,600));
-  function prefetch(){for(let i=1;i<SCENES.length;i++)if(!tex[i].image&&!tex[i]._loading&&i<=Math.max(S.a,S.b)+2){loadTex(i);break}}
-  setInterval(()=>idle(prefetch),700);
+  function prefetch(){const pos=Math.max(ORDER.indexOf(S.a),ORDER.indexOf(S.b));
+    for(const i of [S.a,S.b,...ORDER.slice(pos+1,pos+3)]){if(i===0)continue;if(SCENES[i].video){if(!vid2.src){vid2.src=vid2.dataset.src;vid2.load()}continue}if(!tex[i].image&&!tex[i]._loading){loadTex(i);break}}}
+  setInterval(()=>idle(prefetch),400);addEventListener("scroll",()=>{if(!ready[S.a]||!ready[S.b])prefetch()},{passive:true});
 
   const RS=mobile?6:12,NS=mobile?4:6;
   const V4=()=>new THREE.Vector4(),V2=()=>new THREE.Vector2();
@@ -863,15 +892,27 @@ void main(){
     g.userData.rx=-.95;ART.push(g)}
   {const g=new THREE.Group(),orb=new THREE.Mesh(new THREE.SphereGeometry(1.05,48,32),new THREE.MeshPhysicalMaterial({color:0xffc24a,metalness:1,roughness:.08,clearcoat:1,emissive:0xa86a10,emissiveIntensity:.45}));orb.position.set(0,.9,0);g.add(orb);
     for(let i=0;i<(mobile?10:14);i++){const a=i/14*Math.PI*2,c=Math.cos(a),s=Math.sin(a);g.add(tube([V(c*.35,-3.2,s*.35),V(c*.9,-.3,s*.9),V(c*1.25,.55,s*1.25),V(c*1.05,1.5,s*1.05)],.05,ivory,30))}ART.push(g)}
-  ART.forEach((g,i)=>{if(g){g.visible=false;g.userData.v=0;s3.add(g)}});
+  /* wrap each artefact: outer = placement, inner = rotation; add soft contact shadow + glow */
+  const shC=document.createElement("canvas");shC.width=shC.height=128;{const g=shC.getContext("2d"),gr=g.createRadialGradient(64,64,4,64,64,62);gr.addColorStop(0,"rgba(0,0,0,.55)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(0,0,128,128)}
+  const glC=document.createElement("canvas");glC.width=glC.height=128;{const g=glC.getContext("2d"),gr=g.createRadialGradient(64,64,2,64,64,62);gr.addColorStop(0,"rgba(255,214,150,.9)");gr.addColorStop(.35,"rgba(255,180,90,.25)");gr.addColorStop(1,"rgba(255,170,60,0)");g.fillStyle=gr;g.fillRect(0,0,128,128)}
+  const shT=new THREE.CanvasTexture(shC),glT=new THREE.CanvasTexture(glC);
+  ART.forEach((g,i)=>{if(!g)return;const w=new THREE.Group();w.add(g);
+    const sh=new THREE.Mesh(new THREE.PlaneGeometry(5,5),new THREE.MeshBasicMaterial({map:shT,transparent:true,depthWrite:false}));sh.rotation.x=-Math.PI/2;sh.position.y=-2.3;w.add(sh);
+    const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:glT,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:.55}));gl.scale.set(7,7,1);gl.position.z=-1.5;w.add(gl);
+    w.visible=false;w.userData={v:0,inner:g,sh,gl};s3.add(w);ART[i]=w});
+  const TINT={1:[0xffc98a,0x9fc0ff],2:[0xffb070,0xff8a5a],3:[0xc9b2ff,0xff8a3a],4:[0xa8bcff,0xffc860]};
+  R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=1.05;R.outputEncoding=THREE.sRGBEncoding;
   function upd3d(t,cp){const wide=innerWidth>900;let any=false;
-    for(let i=1;i<ART.length;i++){const g=ART[i];let tv=0;
-      if(cp>.001&&S.b===i&&S.a!==i)tv=clamp01((cp-.25)/.35);
-      else if(cp<.001&&S.a===i)tv=1-clamp01(S.t/.14);
-      g.userData.v+=(tv-g.userData.v)*.15;const v=g.userData.v;g.visible=v>.01;if(!g.visible)continue;any=true;
-      const e=1-Math.pow(1-v,3),out=cp<.001?clamp01(S.t/.14):0;
-      g.position.set((wide?1.8:0)+out*4,wide?0:1.2,-10*(1-e)+out*2);g.scale.setScalar((wide?.8:.55)*(.4+.6*e));
-      g.rotation.set((g.userData.rx||0)+mo.y*.3,t*.4+(1-e)*3+mo.x*.5,0);if(g.userData.tick)g.userData.tick(t)}
+    for(let i=1;i<ART.length;i++){const w=ART[i],g=w.userData.inner;let tv=0,fz=0;
+      if(cp<.001){if(S.a===i)tv=wide?1:1-clamp01(S.t/.14)}
+      else{if(S.a===i){tv=1-clamp01(cp/.45);fz=cp*8}else if(S.b===i)tv=clamp01((cp-.35)/.4)}
+      w.userData.v+=(tv-w.userData.v)*.12;const v=w.userData.v;w.visible=v>.01;if(!w.visible)continue;any=true;
+      const e=1-Math.pow(1-v,3),out=(!wide&&cp<.001)?clamp01(S.t/.14):0;
+      w.position.set((wide?2.75:0)+out*4,(wide?-.15:1.3)+Math.sin(t*1.1+i)*.1,-9*(1-e)+fz+out*2);w.scale.setScalar((wide?.78:.55)*(.45+.55*e));
+      g.rotation.set((g.userData.rx||0)+mo.y*.3+Math.sin(t*.5+i)*.05,t*.25+scrollY*.0012+(1-e)*3+mo.x*.5,0);
+      w.userData.sh.material.opacity=e*.9;w.userData.gl.material.opacity=e*(.4+.15*Math.sin(t*2+i));
+      if(g.userData.tick)g.userData.tick(t)}
+    const ei=cp>.5?S.b:S.a;if(envs[ei])s3.environment=envs[ei];const tn=TINT[ei];if(tn){key.color.lerp(new THREE.Color(tn[0]),.05);rim.color.lerp(new THREE.Color(tn[1]),.05)}
     return any}
 
   /* ---- particles ---- */
@@ -903,14 +944,20 @@ void main(){
     U.zA.value=cur.za;U.zB.value=0;U.p.value=pp;U.time.value=t;U.mouse.value.set(reduce?0:mo.x,reduce?0:mo.y);
     /* pause the intro video when it is off-screen */
     const needVid=S.a===0||S.b===0;if(needVid!==vidOn){vidOn=needVid;needVid?vid.play().catch(()=>{}):vid.pause()}
+    const needV2=S.a===5||S.b===5;if(needV2&&vid2.paused&&vid2.src)vid2.play().catch(()=>{});if(!needV2&&!vid2.paused)vid2.pause();
+    /* caravan walking across the Silk Road scene, with dust at the feet */
+    const cw=S.a===2?(S.b===2?1:1-pp):(S.b===2?pp:0);car.style.opacity=cw.toFixed(3);
+    if(cw>.01){const cwid=car.offsetWidth||W*.4,x=mobile||reduce?W*.08:((t*W/38)%(W+cwid))-cwid;car.style.transform=`translate3d(${x.toFixed(1)}px,0,0)`;car._x=x;car._w=cwid}
+    const mc=$("#mcap");if(mc){const v=S.a===6&&S.b===6?1:S.a===6?1-pp:S.b===6?pp:0;mc.style.opacity=v.toFixed(2)}
     R.autoClear=true;R.render(scene,cam);
     if(!reduce&&upd3d(t,pp)){R.autoClear=false;R.clearDepth();R.render(s3,pc)}
     panelsFrame();
     /* particles: one kind dissolves into the next across a portal */
     g2.clearRect(0,0,W,H);if(reduce)return;
     const kA=A.fx,kB=B.fx;if(P.length<MAX&&Math.random()<.9)spawn(Math.random()<pp?kB:kA);
+    if(cw>.3&&!mobile&&Math.random()<.35){const fx=car._x+Math.random()*car._w;P.push({k:"puff",life:0,x:fx,y:H*(1-.07)-Math.random()*6,vx:-(.2+Math.random()*.6),vy:-(.1+Math.random()*.35),r:2+Math.random()*3.5,c:"205,165,110",max:110,glow:1})}
     const fl=Math.sin(Math.PI*pp);
-    for(let i=P.length-1;i>=0;i--){const o=P[i];o.life++;if(o.k!==kA&&o.k!==kB)o.life+=8;
+    for(let i=P.length-1;i>=0;i--){const o=P[i];o.life++;if(o.k!=="puff"&&o.k!==kA&&o.k!==kB)o.life+=8;
       o.x+=o.vx*(1+fl*5)+mo.x*.3;o.y+=o.vy*(1+fl*5);if(o.k==="embers")o.vx+=(Math.random()-.5)*.08;
       const a=Math.min(1,o.life/40)*Math.max(0,1-o.life/o.max)*(o.tw?(.5+.5*Math.sin(t*4+o.x)):1);
       if(a<=0||o.x<-30||o.x>W+30||o.y<-30||o.y>H+30){P.splice(i,1);continue}
