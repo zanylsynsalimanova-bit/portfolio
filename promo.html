@@ -229,6 +229,11 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 .medal.g{padding-top:26px}.medal.s{padding-top:18px}.medal.b{padding-top:12px}
 @media (max-width:900px){.g3d{height:300px}.gring{left:-150px;top:-150px;width:300px;height:300px}.gring.r2{display:none}.gbeam{width:150px}.gcore{transform:scale(.8)}.gnode{width:150px;left:-75px;padding:10px}.gnode b{font-size:15px}}
 
+.yt{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--gold);background:#000;margin-top:6px;cursor:pointer}
+.yt img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s}.yt:hover img{opacity:1}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytp{position:absolute;left:50%;top:50%;width:76px;height:76px;transform:translate(-50%,-50%);border-radius:50%;border:0;background:var(--gold);cursor:pointer;box-shadow:0 0 0 0 rgba(201,160,90,.6);animation:pulse 2.2s infinite}
+.ytp::after{content:"";position:absolute;left:31px;top:24px;border-left:22px solid var(--ink);border-top:14px solid transparent;border-bottom:14px solid transparent}
 /* Otrar 1219 chapter */
 .ottl{max-width:min(420px,32vw);text-shadow:0 4px 30px rgba(0,0,0,.85)}
 .ottl .otH{font-size:clamp(40px,4.6vw,68px);line-height:.98}
@@ -395,6 +400,13 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
       <h2 data-t="caseH"></h2>
       <div class="case" id="case"></div>
     </div></div>
+    <div class="pin"><div class="panel" id="vlesson">
+      <div class="kicker" data-t="vK"></div>
+      <h2 data-t="vH"></h2>
+      <div class="yt" id="yt" data-id="hFExBUZ2BQY"><img src="https://i.ytimg.com/vi/hFExBUZ2BQY/hqdefault.jpg" alt="" loading="lazy"><button class="ytp" aria-label="play"></button></div>
+      <p class="lead" style="margin-top:10px" data-t="vP"></p>
+      <div class="btns"><a class="btn ghost" href="https://youtu.be/hFExBUZ2BQY" target="_blank" rel="noopener" data-t="vBtn"></a></div>
+    </div></div>
     <div class="pin"><div class="panel" id="method">
       <div class="kicker" data-t="mK"></div>
       <h2 data-t="mH"></h2>
@@ -519,6 +531,7 @@ chips:["№81 ЖОББМ","Педагогикалық өтілі — 19 жыл",
 s1:"білім сапасы",s2:"марапат",s3:"оқушы жетістігі",s4:"олимпиада жүлдесі (мұғалім)",
 phK:"Сабақтан сәттер",phH:"Тарих — <em>қолмен ұстап</em>, көзбен көретін сабақ",
 ph:["Интерактивті 3D карта-рельеф","Тарихи үстел ойыны","Картамен жұмыс","Цифрлық ресурстар · интерактивті панель","Карта-рельефпен топтық жұмыс","«Тарих доңғалағы» ойыны","Шебер-класс әріптестерге","Шебер-класс: картамен жұмыс","Шебер-класс: 3D карта","Пікірсайыс","Глобус және 3D карта","Ландшафт моделі","Оқушылар жобасын қорғайды","Жоба: «Су тапшылығы»","Жоба: «Үнемді үй»","Оқушылар жобасын қорғайды","Ұлттық құндылықтар күні","Жібек жолы: рөлдік ойын","Жібек жолы: рөлдік ойын"],
+vK:"Шеберлік алаңы · авторлық бейнесабақ",vH:"«Моңғолдар әлемдік империяны <em>қалай құрды?</em>»",vP:"Авторлық бейнесабақ — ойнату үшін басыңыз.",vBtn:"YouTube-та ашу ↗",
 caseK:"Сабақ-кейс · 7 «Б» сынып · 14.10.2024 · ҚМЖ бойынша",caseH:"«Абылай ханның <em>ішкі және сыртқы саясаты</em>»",
 case:[["Зерттеу сұрағы","Дербес Қазақ мемлекетін сақтап қалудағы Абылай ханның рөлі қандай?"],
 ["Оқу мақсаты","7.3.1.2 Қазақ хандығының ішкі саяси жағдайын талдау"],
@@ -561,6 +574,7 @@ chips:["СОШ №81","Педагогический стаж — 19 лет","П�
 s1:"качество знаний",s2:"наград",s3:"достижений учеников",s4:"призовых места на олимпиадах учителей",
 phK:"Моменты уроков",phH:"История, которую <em>можно потрогать</em>",
 ph:["Интерактивная 3D-карта-рельеф","Историческая настольная игра","Работа с картой","Цифровые ресурсы · интерактивная панель","Групповая работа с картой-рельефом","Игра «Колесо истории»","Мастер-класс для коллег","Мастер-класс: работа с картой","Мастер-класс: 3D-карта","Дебаты","Глобус и 3D-карта","Модель ландшафта","Ученики защищают проект","Проект «Дефицит воды»","Проект «Экономный дом»","Ученики защищают проект","День национальных ценностей","Шёлковый путь: ролевая игра","Шёлковый путь: ролевая игра"],
+vK:"Площадка мастерства · авторский видеоурок",vH:"«Моңғолдар әлемдік империяны <em>қалай құрды?</em>»",vP:"«Как монголы создали мировую империю?» — авторский видеоурок на казахском языке. Нажмите, чтобы смотреть.",vBtn:"Открыть на YouTube ↗",
 caseK:"Урок-кейс · 7 «Б» класс · 14.10.2024 · по КСП",caseH:"«Внутренняя и внешняя <em>политика Абылай хана</em>»",
 case:[["Исследовательский вопрос","Какова роль Абылай хана в сохранении независимого Казахского государства?"],
 ["Цель обучения","7.3.1.2 Анализировать внутриполитическое положение Казахского ханства"],
@@ -756,6 +770,8 @@ vsc.addEventListener("pointermove",e=>{if(!pts.has(e.pointerId))return;pts.set(e
 ["pointerup","pointercancel","pointerleave"].forEach(ev=>vsc.addEventListener(ev,e=>{pts.delete(e.pointerId);if(pts.size<2)pd0=0}));
 vsc.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
 
+/* video lesson: load YouTube only on click */
+$("#yt").onclick=()=>{const y=$("#yt");if(y.querySelector("iframe"))return;const f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+y.dataset.id+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; fullscreen; picture-in-picture";f.allowFullscreen=true;f.title="Бейнесабақ";y.innerHTML="";y.appendChild(f)};
 /* Otrar: route clip + model frames (model first, reference last) */
 const rv=$("#rv"),rvv=rv.querySelector("video");
 function rvClose(){rv.classList.remove("on");rvv.pause();document.documentElement.style.overflow=""}
