@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Портфолио Ж. Салимановой</title>
-<meta name="description" content="Тарих пәні мұғалімі Салиманова Жанылсын Кадиржановнаның портфолиосы — ғасырлар арқылы саяхат">
+<title>Мұғалім портфолиосы · үлгі сайт</title>
+<meta name="description" content="Тарих пәні мұғалімінің портфолиосы — үлгі сайт">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -323,12 +323,12 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 </style>
 </head>
 <body>
-<div id="load"><div><div class="lt">Салиманова Жанылсын Кадиржановна</div><div class="bar"><i id="lbar"></i></div></div></div>
+<div id="load"><div><div class="lt">Мұғалім портфолиосы</div><div class="bar"><i id="lbar"></i></div></div></div>
 <div id="gl"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <nav id="nav">
-  <a class="logo" href="#intro" data-go="0">Ж.С.</a>
+  <a class="logo" href="#intro" data-go="0">✦</a>
   <div class="navr">
     <button class="btn ghost" id="tourBtnTop" style="padding:7px 14px;font-size:12px" data-t="tourShort"></button>
     <div class="lang"><button data-l="kz" class="on">ҚАЗ</button><button data-l="ru">РУС</button></div>
@@ -342,10 +342,10 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 <section id="intro" data-stage="hold" data-a="0" data-z0="0" data-z1=".22">
   <header class="hero" id="hero">
     <div class="shade"></div>
-    <video id="vid" src="video/welcome.mp4" muted playsinline loop autoplay preload="auto" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" aria-hidden="true"></video>
+    <video id="vid" muted playsinline loop autoplay preload="auto" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none" aria-hidden="true"></video>
     <div class="hero-l">
       <div class="kicker" data-t="subj"></div>
-      <h1>Салиманова <em>Жанылсын</em> Кадиржановна</h1>
+      <h1 data-t="nm"></h1>
       <div class="school" data-t="school"></div>
       <p class="motto3" data-t="motto"></p>
       <p class="invite" data-t="invite"></p>
@@ -400,21 +400,10 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
       <h2 data-t="caseH"></h2>
       <div class="case" id="case"></div>
     </div></div>
-    <div class="pin"><div class="panel" id="vlesson">
-      <div class="kicker" data-t="vK"></div>
-      <h2 data-t="vH"></h2>
-      <div class="yt" id="yt" data-id="hFExBUZ2BQY"><img src="https://i.ytimg.com/vi/hFExBUZ2BQY/hqdefault.jpg" alt="" loading="lazy"><button class="ytp" aria-label="play"></button></div>
-      <p class="lead" style="margin-top:10px" data-t="vP"></p>
-      <div class="btns"><a class="btn ghost" href="https://youtu.be/hFExBUZ2BQY" target="_blank" rel="noopener" data-t="vBtn"></a></div>
-    </div></div>
     <div class="pin"><div class="panel" id="method">
       <div class="kicker" data-t="mK"></div>
       <h2 data-t="mH"></h2>
       <div class="tiles" id="tiles"></div>
-    </div></div>
-    <div class="pin"><div class="panel wide" id="moments">
-      <div class="head"><div><div class="kicker" data-t="phK"></div><h2 data-t="phH"></h2></div><div class="navbtns"><button data-s="gP" data-d="-1" aria-label="prev">←</button><button data-s="gP" data-d="1" aria-label="next">→</button></div></div>
-      <div class="strip" id="gP"></div>
     </div></div>
     <div class="pin"><div class="panel doc qrow" id="quality">
       <div><div class="kicker" data-t="qK"></div><h2 data-t="qH"></h2><p class="src" data-t="qSrc"></p><p style="margin-top:8px"><a class="lnk" href="#" id="qDoc" data-t="qDoc"></a></p></div>
@@ -516,7 +505,7 @@ footer p{opacity:.75;font-size:13px;margin-top:18px}
 <script>
 /* ================= CONTENT ================= */
 const T={
-kz:{subj:"Тарих пәні мұғалімі · Педагог-зерттеуші · Өтілі 19 жыл",school:"№81 жалпы білім беретін орта мектеп",
+kz:{nm:"Сіздің <em>есіміңіз</em> осында",subj:"Тарих пәні мұғалімі · Педагог-зерттеуші · Өтілі 19 жыл",school:"Сіздің мектебіңіз",
 motto:"<span>«Тарих — өткеннің өнегесі,</span><span>бүгіннің бағдары,</span><span>болашақтың темірқазығы».</span>",
 invite:"Сәлеметсіз бе! Менімен бірге ғасырлар арқылы саяхатқа шығыңыз — әр дәуірде менің жұмысымның бір қыры ашылады.",
 start:"Саяхатты бастау ↓",tour:"Портфолио 5 минутта",tourShort:"5 минут",scroll:"Айналдырыңыз",
@@ -527,7 +516,7 @@ y1:"б.з.б. VII–III ғғ.",e1n:"I дәуір",e1t:"Сақтар даласы
 e3n:"III дәуір",e3t:"Қазақ хандығы",e4n:"IV дәуір",e4t:"Тәуелсіз Қазақстан",
 er:["Кіріспе","Сақтар","Жібек жолы","Отырар","Хандық","Тәуелсіздік"],
 aboutK:"Мен туралы",aboutH:"Педагог-<em>зерттеуші</em>",
-chips:["№81 ЖОББМ","Педагогикалық өтілі — 19 жыл","Педагог-зерттеуші","Қазақстан және дүниежүзі тарихы","«Үздік пән мұғалімі – 2026»"],
+chips:["Сіздің мектебіңіз","Педагогикалық өтілі — 19 жыл","Педагог-зерттеуші","Қазақстан және дүниежүзі тарихы","«Үздік пән мұғалімі – 2026»"],
 s1:"білім сапасы",s2:"марапат",s3:"оқушы жетістігі",s4:"олимпиада жүлдесі (мұғалім)",
 phK:"Сабақтан сәттер",phH:"Тарих — <em>қолмен ұстап</em>, көзбен көретін сабақ",
 ph:["Интерактивті 3D карта-рельеф","Тарихи үстел ойыны","Картамен жұмыс","Цифрлық ресурстар · интерактивті панель","Карта-рельефпен топтық жұмыс","«Тарих доңғалағы» ойыны","Шебер-класс әріптестерге","Шебер-класс: картамен жұмыс","Шебер-класс: 3D карта","Пікірсайыс","Глобус және 3D карта","Ландшафт моделі","Оқушылар жобасын қорғайды","Жоба: «Су тапшылығы»","Жоба: «Үнемді үй»","Оқушылар жобасын қорғайды","Ұлттық құндылықтар күні","Жібек жолы: рөлдік ойын","Жібек жолы: рөлдік ойын"],
@@ -540,13 +529,13 @@ case:[["Зерттеу сұрағы","Дербес Қазақ мемлекеті
 ["Бағалау критерийі","Абылай ханның өмірі туралы біледі. Дескриптор: Абылайдың балалық шағынан, бозбала кезінен және есейген тұсынан кемінде 2 маңызды мәліметтен анықтайды."],
 ["Кері байланыс","«Мадақтау сэндвичі», «Алақан-жұдырық», өзін-өзі бағалау; рефлексия «Бес саусақ»: «Бүгін менің білгенім… Маған қиын болды… Енді мен істей аламын…»"]],
 mK:"Әдістеме",mH:"Сабағым — <em>шағын зерттеу</em>",
-qK:"Расталған нәтиже",qH:"Білім сапасы <em>79% → 89%</em>",qSrc:"Анықтама бойынша: №1 Шұбарқұдық мектеп-гимназиясы, 2023–2026 оқу жылдары. Қазіргі жұмыс орны — №81 ЖОББМ.",qDoc:"Анықтаманы ашу →",
+qK:"Расталған нәтиже",qH:"Білім сапасы <em>79% → 89%</em>",qSrc:"Анықтама бойынша, 2023–2026 оқу жылдары · үлгі деректер.",qDoc:"Анықтаманы ашу →",
 aK:"Құжаттар мұрағаты",aH:"Марапаттар <em>шежіресі</em>",
 srcK:"Тарихи дереккөзбен жұмыс",srcH:"Дереккөзден — <em>дәлелге</em>",chain:["Дереккөз","Сұрақ","Дәлел","Қорытынды"],
 srcP:"«XI–XIX ғасырлардағы еуропалық және американдық карталардағы Қазақ мемлекеті» облыстық шеберханасында тәжірибе бөлістім (2025).",srcDoc:"Сертификатты көру",
 stK:"Тәлімгерлік",stH:"Оқушыларымның <em>жеңістері</em>",m1:"I дәреже",m2:"II дәреже",m3:"III дәреже",m4:"мақтау / сертификат",
 
-fP:"Салиманова Жанылсын Кадиржановна · №81 жалпы білім беретін орта мектеп · 2026",
+fP:"Мұғалім портфолиосы · үлгі сайт · 2026",
 o1n:"Ұлы Жібек жолының қаласы",o1t:"Отырар",
 otK:"Ғылыми жоба",otH:"Отырар 1219 — <em>цифрлық реконструкция</em>",otCap:"Болашақ VR-серуеннің көркем референсі",
 otK2:"Жоба туралы қысқаша",otH2:"Қала <em>қандай болды?</em>",
@@ -559,7 +548,7 @@ otHintO:"Тышқанмен айналдырыңыз, дөңгелекпен ж�
 all:"Барлығы",dip:"Дипломдар",thx:"Алғыс хаттар",cert:"Сертификаттар",cls:"сынып",fit:"Сыю",orig:"Түпнұсқа ↗",
 L:{int:"Халықаралық",rep:"Республикалық",reg:"Облыстық",dis:"Аудандық"},
 tourSteps:[["Педагог","1 мин"],["Бір сабақ","1,5 мин"],["Расталған нәтиже","1 мин"],["Жетістіктер","1,5 мин"]],tourDone:"Маршрут аяқталды"},
-ru:{subj:"Учитель истории · Педагог-исследователь · Стаж 19 лет",school:"КГУ «Средняя общеобразовательная школа №81»",
+ru:{nm:"Здесь <em>ваше</em> имя",subj:"Учитель истории · Педагог-исследователь · Стаж 19 лет",school:"Ваша школа",
 motto:"<span>«История — урок прошлого,</span><span>ориентир настоящего</span><span>и путеводная звезда будущего».</span>",
 invite:"Здравствуйте! Отправьтесь со мной в путешествие сквозь века — каждая эпоха откроет одну грань моей работы.",
 start:"Начать путешествие ↓",tour:"Портфолио за 5 минут",tourShort:"5 минут",scroll:"Листайте",
@@ -570,7 +559,7 @@ y1:"VII–III вв. до н.э.",e1n:"Эпоха I",e1t:"Степь саков",
 e3n:"Эпоха III",e3t:"Казахское ханство",e4n:"Эпоха IV",e4t:"Независимый Казахстан",
 er:["Вступление","Саки","Шёлковый путь","Отрар","Ханство","Независимость"],
 aboutK:"Обо мне",aboutH:"Педагог-<em>исследователь</em>",
-chips:["СОШ №81","Педагогический стаж — 19 лет","Педагог-исследователь","История Казахстана и всемирная","«Лучший учитель – 2026»"],
+chips:["Ваша школа","Педагогический стаж — 19 лет","Педагог-исследователь","История Казахстана и всемирная","«Лучший учитель – 2026»"],
 s1:"качество знаний",s2:"наград",s3:"достижений учеников",s4:"призовых места на олимпиадах учителей",
 phK:"Моменты уроков",phH:"История, которую <em>можно потрогать</em>",
 ph:["Интерактивная 3D-карта-рельеф","Историческая настольная игра","Работа с картой","Цифровые ресурсы · интерактивная панель","Групповая работа с картой-рельефом","Игра «Колесо истории»","Мастер-класс для коллег","Мастер-класс: работа с картой","Мастер-класс: 3D-карта","Дебаты","Глобус и 3D-карта","Модель ландшафта","Ученики защищают проект","Проект «Дефицит воды»","Проект «Экономный дом»","Ученики защищают проект","День национальных ценностей","Шёлковый путь: ролевая игра","Шёлковый путь: ролевая игра"],
@@ -583,13 +572,13 @@ case:[["Исследовательский вопрос","Какова роль 
 ["Критерий оценивания","Знает о жизни Абылай хана. Дескриптор: называет не менее 2 важных фактов о детстве, юности и зрелых годах Абылая."],
 ["Обратная связь","«Сэндвич похвалы», «Ладонь-кулак», самооценивание; рефлексия «Пять пальцев»: «Сегодня я узнал… Мне было трудно… Теперь я умею…»"]],
 mK:"Методика",mH:"Мой урок — <em>маленькое исследование</em>",
-qK:"Подтверждённый результат",qH:"Качество знаний <em>79% → 89%</em>",qSrc:"По справке: школа-гимназия №1 Шубаркудук, 2023–2026 учебные годы. Текущее место работы — СОШ №81.",qDoc:"Открыть справку →",
+qK:"Подтверждённый результат",qH:"Качество знаний <em>79% → 89%</em>",qSrc:"По справке, 2023–2026 учебные годы · демо-данные.",qDoc:"Открыть справку →",
 aK:"Архив документов",aH:"<em>Летопись</em> наград",
 srcK:"Работа с историческим источником",srcH:"От источника — <em>к доказательству</em>",chain:["Источник","Вопрос","Доказательство","Вывод"],
 srcP:"Делилась опытом на областной мастерской «Казахское государство на европейских и американских картах XI–XIX веков» (2025).",srcDoc:"Посмотреть сертификат",
 stK:"Наставничество",stH:"Победы моих <em>учеников</em>",m1:"I степень",m2:"II степень",m3:"III степень",m4:"похвалы / сертификаты",
 
-fP:"Салиманова Жанылсын Кадиржановна · КГУ «СОШ №81» · 2026",
+fP:"Портфолио педагога · демо-сайт · 2026",
 o1n:"Город Великого Шёлкового пути",o1t:"Отрар",
 otK:"Научный проект",otH:"Отрар 1219 — <em>цифровая реконструкция</em>",otCap:"Художественный референс будущей VR-прогулки",
 otK2:"Кратко о проекте",otH2:"Каким был <em>город?</em>",
@@ -635,17 +624,16 @@ function render(){
   $("#otEv").innerHTML=t.otEv.map(r=>`<div class="ev"><b>${r[0]}</b>${r[2].map(x=>`<span>${x}</span>`).join("")}<div>${r[1]}</div></div>`).join("");
   $("#years").innerHTML=YEARS.map(y=>`<div class="yrc"><b>${y[0]}</b>${y[1][K]}</div>`).join("");
   $("#fA").innerHTML=[["all",t.all],["dip",t.dip],["thx",t.thx],["cert",t.cert]].map((x,i)=>`<button data-f="${x[0]}" class="${i?"":"on"}">${x[1]}</button>`).join("");
-  $("#gA").innerHTML=AW.map((a,i)=>`<div class="card" tabindex="0" role="button" data-type="${a[0]}" data-i="${i}" data-src="img/a${pad(i)}.jpg" data-hi="hi/a${pad(i)}.jpg" data-year="${a[2]}" data-title="${(K?a[4]:a[3]).replace(/"/g,"&quot;")}"><div class="ph"><img loading="lazy" decoding="async" src="img/a${pad(i)}.jpg" alt=""></div><div class="cap"><b><span>${t.L[a[1]]}</span><span>${a[2]}</span></b>${a[3+K]}</div></div>`).join("");
-  $("#gP").innerHTML=t.ph.map((c,i)=>`<div class="card" tabindex="0" role="button" data-src="lesson/ph${pad(i)}.jpg" data-hi="lesson/ph${pad(i)}.jpg" data-year="" data-title="${c}"><div class="ph"><img loading="lazy" decoding="async" src="lesson/ph${pad(i)}.jpg" alt="${c}"></div><div class="cap">${c}</div></div>`).join("");
-  $("#gS").innerHTML=ST.map((s,i)=>`<div class="card" tabindex="0" role="button" data-src="img/s${pad(i)}.jpg" data-hi="hi/s${pad(i)}.jpg" data-year="${s[4]}" data-title="${s[0]} — ${(K?s[6]:s[5]).replace(/"/g,"&quot;")}"><div class="ph"><img loading="lazy" decoding="async" src="img/s${pad(i)}.jpg" alt=""></div><div class="cap"><b><span>${PL[lang][s[3]]}</span><span>${s[4]}</span></b><strong style="font-family:var(--serif);font-size:16px">${s[0]}</strong>${s[1]?` · ${s[1]} ${t.cls}`:""}<br>${s[5+K]}</div></div>`).join("");
+  $("#gA").innerHTML=AW.map((a,i)=>`<div class="card" tabindex="0" role="button" data-type="${a[0]}" data-i="${i}" data-src="demo/a${pad(i)}.jpg" data-hi="demo/a${pad(i)}.jpg" data-year="${a[2]}" data-title="${(K?a[4]:a[3]).replace(/"/g,"&quot;")}"><div class="ph"><img loading="lazy" decoding="async" src="demo/a${pad(i)}.jpg" alt=""></div><div class="cap"><b><span>${t.L[a[1]]}</span><span>${a[2]}</span></b>${a[3+K]}</div></div>`).join("");
+  $("#gS").innerHTML=ST.map((s,i)=>`<div class="card" tabindex="0" role="button" data-src="demo/s${pad(i)}.jpg" data-hi="demo/s${pad(i)}.jpg" data-year="${s[4]}" data-title="${lang==="kz"?"Оқушы":"Ученик"} — ${(K?s[6]:s[5]).replace(/"/g,"&quot;")}"><div class="ph"><img loading="lazy" decoding="async" src="demo/s${pad(i)}.jpg" alt=""></div><div class="cap"><b><span>${PL[lang][s[3]]}</span><span>${s[4]}</span></b><strong style="font-family:var(--serif);font-size:16px">${lang==="kz"?"Оқушы":"Ученик"}</strong>${s[1]?` · ${s[1]} ${t.cls}`:""}<br>${s[5+K]}</div></div>`).join("");
   $$("#fA button").forEach(b=>b.onclick=()=>{$$("#fA button").forEach(x=>x.classList.toggle("on",x===b));$$("#gA .card").forEach(c=>c.classList.toggle("hide",b.dataset.f!=="all"&&c.dataset.type!==b.dataset.f));$("#gA").scrollLeft=0;flow($("#gA"))});
-  ["#gA","#gS","#gP"].forEach(id=>{const s=$(id);s.onscroll=()=>requestAnimationFrame(()=>flow(s));setTimeout(()=>flow(s),60)});
+  ["#gA","#gS"].forEach(id=>{const s=$(id);s.onscroll=()=>requestAnimationFrame(()=>flow(s));setTimeout(()=>flow(s),60)});
   updateNav();if(tourOn)tourShow();
   requestAnimationFrame(()=>{layoutPins();measure()});
 }
 $$(".lang button").forEach(b=>b.onclick=()=>{lang=b.dataset.l;try{localStorage.setItem("lang",lang)}catch(e){}render()});
 $$(".navbtns button").forEach(b=>b.onclick=()=>{const s=document.getElementById(b.dataset.s);s.scrollBy({left:+b.dataset.d*s.clientWidth*.7,behavior:"smooth"})});
-addEventListener("resize",()=>["#gA","#gS","#gP"].forEach(id=>flow($(id))));
+addEventListener("resize",()=>["#gA","#gS"].forEach(id=>flow($(id))));
 function flow(s){const r=s.getBoundingClientRect();if(!r.width)return;const c=r.left+r.width/2;
   for(const k of s.children){if(k.classList.contains("hide"))continue;const b=k.getBoundingClientRect(),o=Math.max(-1,Math.min(1,(b.left+b.width/2-c)/(r.width/2)));
     k.style.transform=`perspective(900px) rotateY(${(-o*30).toFixed(1)}deg) translateZ(${(-Math.abs(o)*80).toFixed(0)}px)`;k.style.opacity=(1-Math.abs(o)*.3).toFixed(2)}}
@@ -753,8 +741,8 @@ function openCard(c){const cards=[...c.parentNode.children].filter(k=>!k.classLi
 document.addEventListener("click",e=>{const c=e.target.closest(".card");if(c&&!lb.contains(c))openCard(c)});
 document.addEventListener("keydown",e=>{const c=e.target.closest&&e.target.closest(".card");if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openCard(c)}
   if(!lb.classList.contains("on"))return;if(e.key==="Escape")vClose();if(e.key==="ArrowRight")vSet(vI+1);if(e.key==="ArrowLeft")vSet(vI-1);if(e.key==="+"||e.key==="=")zoom(1.25);if(e.key==="-")zoom(.8)});
-$("#qDoc").onclick=e=>{e.preventDefault();vOpen([{src:"img/quality.jpg",hi:"hi/quality.jpg",title:T[lang].qH.replace(/<[^>]+>/g,""),year:"2023–2026"}],0,e.target)};
-$("#srcDoc").onclick=e=>vOpen([7,18].map(i=>({src:`img/a${pad(i)}.jpg`,hi:`hi/a${pad(i)}.jpg`,title:AW[i][lang==="kz"?3:4],year:AW[i][2]})),0,e.target);
+$("#qDoc").onclick=e=>{e.preventDefault();vOpen([{src:"demo/quality.jpg",hi:"demo/quality.jpg",title:T[lang].qH.replace(/<[^>]+>/g,""),year:"2023–2026"}],0,e.target)};
+$("#srcDoc").onclick=e=>vOpen([7,18].map(i=>({src:`demo/a${pad(i)}.jpg`,hi:`demo/a${pad(i)}.jpg`,title:AW[i][lang==="kz"?3:4],year:AW[i][2]})),0,e.target);
 function zoom(f){const sc=vsc,cx=(sc.scrollLeft+sc.clientWidth/2)/(vimg.offsetWidth||1),cy=(sc.scrollTop+sc.clientHeight/2)/(vimg.offsetHeight||1);
   vZoom=Math.max(1,Math.min(4,vZoom*f));applyZoom();sc.scrollLeft=cx*vimg.offsetWidth-sc.clientWidth/2;sc.scrollTop=cy*vimg.offsetHeight-sc.clientHeight/2}
 $("#zIn").onclick=()=>zoom(1.35);$("#zOut").onclick=()=>zoom(1/1.35);$("#zFit").onclick=()=>{vZoom=1;applyZoom()};
@@ -771,7 +759,6 @@ vsc.addEventListener("pointermove",e=>{if(!pts.has(e.pointerId))return;pts.set(e
 vsc.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
 
 /* video lesson: load YouTube only on click */
-$("#yt").onclick=()=>{const y=$("#yt");if(y.querySelector("iframe"))return;const f=document.createElement("iframe");f.src="https://www.youtube-nocookie.com/embed/"+y.dataset.id+"?autoplay=1&rel=0";f.allow="autoplay; encrypted-media; fullscreen; picture-in-picture";f.allowFullscreen=true;f.title="Бейнесабақ";y.innerHTML="";y.appendChild(f)};
 /* Otrar: route clip + model frames (model first, reference last) */
 const rv=$("#rv"),rvv=rv.querySelector("video");
 function rvClose(){rv.classList.remove("on");rvv.pause();document.documentElement.style.overflow=""}
@@ -788,7 +775,7 @@ render();
 
 /* ================= CINEMATIC ENGINE ================= */
 const SCENES=[
- {video:"#vid",asp:16/9,fi:[.22,.80],fo:[.22,.80],r:[.22,.86],rs:.4,fx:"beam",cx:.6,p:[.95,0,0,0],g:[1,.85,.6,0]},
+ {src:"img/library.jpg",asp:16/9,fi:[.22,.80],fo:[.22,.80],r:[.22,.86],rs:.4,fx:"beam",cx:.6,p:[.95,0,0,0],g:[1,.85,.6,0]},
  {src:"img/era1.jpg",asp:16/9,fi:[.5,.55],fo:[.46,.2],r:[.22,.80],rs:.6,fx:"pollen",p:[.66,1,.9,0],g:[1,.88,.72,.38],l:[.22,.80,.07,.3]},
  {src:"img/era2.jpg",asp:16/9,fi:[.32,.12],fo:[.97,.44],r:[.97,.44],rs:.4,fx:"sand",p:[.27,0,.12,0],g:[.95,.74,.5,.28],l:[.97,.44,.08,.25],w:[0,.06,.62,.42]},
  {src:"img/era3.jpg",asp:16/9,fi:[.47,.30],fo:[.47,.30],r:[.47,.30],rs:.18,fx:"embers",p:[.76,.6,.1,0],g:[.62,.6,.82,.24],l:[.47,.30,.1,.7],w:[.84,.25,.99,.45]},
@@ -815,11 +802,11 @@ const ORDER=[0,1,2,5,6,7,3,4];
   const envs=[];let PM=null;const mkEnv=(i,im)=>{const go=()=>{if(!PM)PM=new THREE.PMREMGenerator(R);const c=document.createElement("canvas");c.width=512;c.height=256;c.getContext("2d").drawImage(im,0,0,512,256);const et=new THREE.CanvasTexture(c);et.mapping=THREE.EquirectangularReflectionMapping;envs[i]=PM.fromEquirectangular(et).texture};(window.requestIdleCallback||setTimeout)(go)};
   const tex=SCENES.map((s,i)=>{let t;if(s.video){const v=$(s.video);t=new THREE.VideoTexture(v);const f=()=>{if(!ready[i]){ready[i]=1;if(i===0){lbar.style.width="50%";check()}}};if(v.readyState>=2)f();else{v.addEventListener("loadeddata",f);v.addEventListener("error",f)}}
     else t=new THREE.Texture();t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;return t});
-  function loadTex(i){if(i<1||i>=SCENES.length||tex[i].image||tex[i]._loading)return;tex[i]._loading=1;
+  function loadTex(i){if(i<0||i>=SCENES.length||tex[i].image||tex[i]._loading)return;tex[i]._loading=1;
     const im=new Image();im.decoding="async";im.onload=()=>{const go=()=>{tex[i].image=im;tex[i].needsUpdate=true;R.initTexture(tex[i]);ready[i]=1;mkEnv(i,im);if(i===1){lbar.style.width="100%";check()}};
       im.decode?im.decode().then(go,go):go()};im.onerror=()=>{ready[i]=1;check()};im.src=SCENES[i].src}
   function check(){if(ready[0]&&ready[1])setTimeout(done,200)}
-  loadTex(1);setTimeout(done,8000);
+  loadTex(0);loadTex(1);setTimeout(done,8000);
   /* progressive: prefetch the next eras in idle time */
   const idle=window.requestIdleCallback||(f=>setTimeout(f,600));
   function prefetch(){const pos=Math.max(ORDER.indexOf(S.a),ORDER.indexOf(S.b));
